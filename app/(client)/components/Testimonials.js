@@ -31,7 +31,7 @@ const Testimonials = () => {
   useEffect(() => {
     const getReviews = async () => {
       try {
-        const response = await axios.get("/api/admin/reviews");
+        const response = await axios.get("/api/client/reviews");
         const allReviews = response.data.reviews;
         const approvedReviews = allReviews.filter(
           (review) => review.reviewStatus === "Approved"

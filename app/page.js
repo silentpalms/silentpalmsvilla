@@ -1,4 +1,5 @@
 "use client"
+import { useEffect,useState } from "react";
 import Featured from "./(client)/components/Featured";
 import Footer from "./(client)/components/Footer";
 import Hero from "./(client)/components/Hero";
@@ -8,11 +9,19 @@ import Story from "./(client)/components/Story";
 import Testimonials from "./(client)/components/Testimonials";
 import Video from "./(client)/components/Video";
 import Why from "./(client)/components/Why";
+import Loading from "./(client)/components/Loading";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+  useEffect(()=>{
+  setTimeout(()=>{
+    setLoading(false)
+  }, 5000)
+  },[])
   return (
     <main>
-      <div>
+      {loading?(<Loading/>):(
+        <div>
         <Navbar />
         <Hero/>
         <Story/>
@@ -23,6 +32,7 @@ export default function Home() {
         <Review/>
         <Footer/>
       </div>
+      )}    
     </main>
   );
 }

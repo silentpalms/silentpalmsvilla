@@ -52,7 +52,7 @@ const Review = () => {
         rating: val,
         message: message,
       };
-      await axios.post("/api/reviews", review);
+      await axios.post("/api/client/reviews", review);
       setName("");
       setMessage("");
       setShow(false);
