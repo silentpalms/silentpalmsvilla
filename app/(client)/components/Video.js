@@ -23,7 +23,7 @@ const Video = () => {
           Mesmerizing Sunset
         </p>
       </div>
-      <div className="h-[400px] md:w-[90%] mx-auto relative">
+      <div className="h-full md:w-[90%] mx-auto relative">
         <div className="w-full h-full relative">
           <video
             ref={videoRef}
