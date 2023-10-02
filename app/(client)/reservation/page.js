@@ -221,8 +221,8 @@ const page = () => {
     if (fromDate && toDate) {
       tempRooms = tempRooms.filter((house) => {
         const bookings = house.currentBookings;
-        if (bookings.length === 0) {
-          return true;
+        if (bookings?.length === 0) {
+          return;
         }
         for (const booking of bookings) {
           const bookingFromDate = moment(booking.fromDate, "DD-MM-YYYY");
@@ -412,7 +412,7 @@ const page = () => {
         </div>
       ) : (
         <div className="h-full">
-          {filteredHouses.length > 0 ? (
+          {filteredHouses?.length > 0 ? (
             <div>
               {filteredHouses.map((house, index) => {
                 return (
