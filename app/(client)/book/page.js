@@ -268,9 +268,9 @@ const toDate = results?.toDate
 
                
                 <div className="grid grid-cols-2 gap-2  mb-1 w-full md:w-[450px] md:mx-auto">
-                  <div className="bg-green-400 h-[130px] flex justify-center items-center flex-col">
-                    <p className="text-7xl text-white font-bold">{fromDay}</p>
-                    <p className="text-3xl text-white">{fromMonth}</p>
+                  <div className="bg-green-400 h-[130px] relative w-full flex justify-center items-center flex-col">
+                    <p className="text-7xl text-white font-bold absolute top-6 left-0">{fromDay}</p>
+                    <p className="text-3xl text-white absolute bottom-3 left-0">{fromMonth}</p>
                   </div>
                   <div className="bg-green-400 h-[130px] flex justify-center items-center flex-col">
                     <p className="text-7xl text-white font-bold">{toDay}</p>
