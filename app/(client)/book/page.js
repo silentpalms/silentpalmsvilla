@@ -49,6 +49,8 @@ const toDate = results?.toDate
   const toMonth = moment(toDate, "DD-MM-YYYY").format("MMM").toUpperCase();
   const noOfDays = Number(toDay) - Number(fromDay) + 1;
 
+ 
+
 
 
 
@@ -269,44 +271,45 @@ const toDate = results?.toDate
                
                 <div className="grid grid-cols-2 gap-2 relative  mb-1 w-full md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white font-bold absolute top-6 left-0">{fromDay}</p>
-                    <p className="text-3xl text-white absolute bottom-0 left-0">{fromMonth}</p>
+                    <p className="text-7xl text-white font-bold mb-0 absolute left-0 top-2 left-1/2 -translate-x-1/2">{fromDay}</p>
+                    <p className="text-2xl text-white absolute mb-0 bottom-0 left-1/2 -translate-x-1/2">{fromMonth}</p>
                   </div>
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white font-bold absolute top-6 left-0">{toDay}</p>
-                    <p className="text-3xl text-white bottom-0 left-0">{toMonth}</p>
+                    <p className="text-7xl text-white font-bold mb-0 absolute top-2 left-1/2 -translate-x-1/2">{toDay}</p>
+                    <p className="text-2xl text-white absolute mb-0 bottom-0 left-0 left-1/2 -translate-x-1/2">{toMonth}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 relative md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white absolute top-6 left-0 font-bold">
+                    <p className="text-7xl text-white absolute mb-0 left-0 font-bold top-2 left-1/2 -translate-x-1/2">
                       <FaUsers />
                     </p>
 
-                    <p className="text-3xl text-white absolute bottom-0 left-0">
+                    <p className="text-2xl text-white absolute mb-0 bottom-0  left-1/2 -translate-x-1/2">
                       {guests > 1 ? (
                         <>
-                          <span>{guests} guests</span>
+                          <span>{guests} Guests</span>
                         </>
                       ) : (
                         <>
-                          <span>{guests} guest</span>
+                          <span>{guests} Guest</span>
                         </>
                       )}
                     </p>
                   </div>
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white font-bold absolute top-6 left-0">
+                    <p className="text-7xl text-white font-bold mb-0 absolute top-2 left-1/2 -translate-x-1/2">
                       <BsCashStack />
                     </p>
-                    <p className="text-3xl text-white absolute bottom-0 left-0">
-                      <span className="text-lg">KES </span>
-                      {formatter.format(amountTotal)}
+                    <p className="text-2xl text-white absolute mb-0 bottom-0 left-1/2 -translate-x-1/2">
+                      <span> {formatter.format(amountTotal)} </span>
+                    
+                    
                     </p>
                   </div>
                 </div>
                 <div className="py-6 md:w-[450px] mx-auto">
-                  <p className="font-extrabold">
+                  <p className="font-extrabold mb-0">
                     You are required to pay an initial deposit of KES{" "}
                     {formatter.format(amountTotal / 2)} or a full payment of
                     KES {formatter.format(amountTotal)} via lipa na mpesa
