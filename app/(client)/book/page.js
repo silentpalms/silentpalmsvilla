@@ -250,7 +250,7 @@ const toDate = results?.toDate
                 </div>
               </div>
             </div>
-            <div className="w-full h-full pb-8">
+            <div className="w-full h-full py-8">
               <div>
                 <div className="relative h-[320px] md:w-[450px] mx-auto">
                   <Image
