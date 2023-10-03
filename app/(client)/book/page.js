@@ -260,7 +260,7 @@ const toDate = results?.toDate
                     className="box object-cover"
                   />
                 </div>
-                <div className="my-6 w-full h-fit">
+                <div className="py-6 w-full h-fit">
                   <p className="text-lg text-green-800 font-extrabold text-center">
                     {parsedValues.houseTitle}
                   </p>
@@ -305,7 +305,7 @@ const toDate = results?.toDate
                     </p>
                   </div>
                 </div>
-                <div className="my-6 md:w-[450px] mx-auto">
+                <div className="py-6 md:w-[450px] mx-auto">
                   <p className="font-extrabold">
                     You are required to pay an initial deposit of KES{" "}
                     {formatter.format(amountTotal / 2)} or a full payment of
