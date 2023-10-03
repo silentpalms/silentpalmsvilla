@@ -13,31 +13,43 @@ import Loading from '../components/Loading';
 
 const page = () => {
   const [loading, setLoading] = useState(false);
+  const [initialDate, setInitialDate] = useState("00")
+  const [initialMonth, setInitialMonth] = useState("MON")
+  const [finalDate, setFinalDate] = useState("O0")
+  const [finalMonth, setFinalMonth] = useState("MON")
+
+
+ 
   const router = useRouter()
    const searchParams = useSearchParams()
    
-   const queryString = searchParams.get("queryString")
-   const results = JSON.parse(queryString)
+  const queryString = searchParams.get("queryString")
+  const results = JSON.parse(queryString)
 
-   const [open, setOpen] = useState(false);
-   const [checked, setChecked] = useState(false);
-   const [disabled, setDisabled] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
 
-   const checkHandler = () => {
+  const checkHandler = () => {
     setChecked(!checked);
     setDisabled(!disabled);
   };
 
+
+
 const fromDate = results?.fromDate
 const toDate = results?.toDate
   const fromDay = moment(fromDate, "DD-MM-YYYY").format("DD");
+  
   const fromThisDay = moment(fromDate, "DD-MM-YYYY").format("DD-MM-YYYY");
   const fromMonth = moment(fromDate, "DD-MM-YYYY").format("MMM").toUpperCase();
   const toDay = moment(toDate, "DD-MM-YYYY").format("DD");
   const toThisDay = moment(toDate, "DD-MM-YYYY").format("DD-MM-YYYY");
   const toMonth = moment(toDate, "DD-MM-YYYY").format("MMM").toUpperCase();
   const noOfDays = Number(toDay) - Number(fromDay) + 1;
+
+
 
 
    // Parse the JSON string back to objects
@@ -89,11 +101,7 @@ const toDate = results?.toDate
   };
 
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setLoading(false)
-    }, 5000)
-  },[])
+
 
  
   return (
@@ -124,7 +132,7 @@ const toDate = results?.toDate
             <Heading title="Booking Details" />
           </div>
           <div className="grid md:grid-cols-2">
-            {/* <div className="py-8 ">
+            <div className="py-8 ">
               <div className="grid grid-cols-3 gap-y-8">
                 <div>
                   <h4 className="text-lg text-green-800 font-extrabold">
@@ -241,28 +249,25 @@ const toDate = results?.toDate
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="w-full h-full pb-8">
               <div>
-                {/* <div className="relative h-[320px] md:w-[450px] mx-auto">
+                <div className="relative h-[320px] md:w-[450px] mx-auto">
                   <Image
                     src={parsedValues.houseImage}
                     fill
                     alt={parsedValues.houseTitle}
                     className="box object-cover"
                   />
-                </div> */}
-                {/* <div className="my-6 w-full h-fit">
+                </div>
+                <div className="my-6 w-full h-fit">
                   <p className="text-lg text-green-800 font-extrabold text-center">
                     {parsedValues.houseTitle}
                   </p>
-                </div> */}
+                </div>
 
-                <div className="bg-green-400 flex justify-center items-center flex-col">
-                    <p className="text-7xl text-white font-bold">{fromDay}</p>
-                    <p className="text-3xl text-white">{fromMonth}</p>
-                  </div>
-                {/* <div className="grid grid-cols-2 gap-2  mb-1 w-full md:w-[450px] md:mx-auto">
+               
+                <div className="grid grid-cols-2 gap-2  mb-1 w-full md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] flex justify-center items-center flex-col">
                     <p className="text-7xl text-white font-bold">{fromDay}</p>
                     <p className="text-3xl text-white">{fromMonth}</p>
@@ -271,8 +276,8 @@ const toDate = results?.toDate
                     <p className="text-7xl text-white font-bold">{toDay}</p>
                     <p className="text-3xl text-white">{toMonth}</p>
                   </div>
-                </div> */}
-                {/* <div className="grid grid-cols-2 gap-2 md:w-[450px] md:mx-auto">
+                </div>
+                <div className="grid grid-cols-2 gap-2 md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] flex justify-center items-center flex-col">
                     <p className="text-7xl text-white font-bold">
                       <FaUsers />
@@ -299,8 +304,8 @@ const toDate = results?.toDate
                       {formatter.format(amountTotal)}
                     </p>
                   </div>
-                </div> */}
-                {/* <div className="my-6 md:w-[450px] mx-auto">
+                </div>
+                <div className="my-6 md:w-[450px] mx-auto">
                   <p className="font-extrabold">
                     You are required to pay an initial deposit of KES{" "}
                     {formatter.format(amountTotal / 2)} or a full payment of
@@ -338,7 +343,7 @@ const toDate = results?.toDate
                       CONFIRM PAYMENT
                     </button>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
             <div className="md:hidden ">

@@ -26,6 +26,7 @@ import moment from "moment";
 
 import { useFormik } from "formik";
 import LoadingHouse from "../components/LoadingHouse";
+import Booking from "../components/Booking";
 
 const page = () => {
 
@@ -46,19 +47,17 @@ const page = () => {
   const [disableEnterDetails, setDisableEnterDetails] = useState(true);
   const [selectedDates, setSelectedDates] = useState([null, null]);
   const [chosenDates, setChosenDates] = useState([null, null]);
-  const [firstDate, setFirstDate] = useState(null);
-  const [lastDate, setLastDate] = useState(null);
+ 
+
 
   console.log(filteredHouses);
+
+  
 
  
 
   let formatter = new Intl.NumberFormat("en-us");
-
-  //   // const queryString = new URLSearchParams(queryParams).toString();
   
-  //   // router.push(`/book?${queryString}`);
-  // };
   const timeOptions = [
     { label: "10:00 am", value: "10:00 am" },
     { label: "11:00 am", value: "11:00 am" },
@@ -253,6 +252,7 @@ const page = () => {
     event.preventDefault();
     setIsOpen((prevOpen) => (prevOpen === houseId ? false : houseId));
   };
+  
   return (
     <div className="bg-gray-100  h-fit py-12">
     <div className="h-full hidden md:flex w-[1000px] mx-auto relative">
@@ -649,6 +649,7 @@ function HouseForm({
         houseTitle: houseTitle,
         houseAmount: houseAmount,
         houseImage: houseImage,
+        
       },
       validate,
       onSubmit,
@@ -660,6 +661,8 @@ function HouseForm({
       fromDate,
       guests,
     }
+
+   
   
     return (
       <form onSubmit={formik.handleSubmit}>
@@ -862,17 +865,11 @@ function HouseForm({
   
           <div className="w-full flex justify-between flex-row-reverse">
 
-            <Link href={{
+          <Link href={{
              
-              pathname:"/book",
-              query:{queryString:JSON.stringify(queryString)}
-            }} className="px-6 py-3 my-3  bg-green-800 text-white">Confirm</Link>
-            {/* <button
-              type="submit"
-              className="px-6 py-3 my-3  bg-green-800 text-white"
-            >
-              CONFIRM
-            </button> */}
+             pathname:"/book",
+             query:{queryString:JSON.stringify(queryString)}
+           }} className="px-6 py-3 my-3  bg-green-800 text-white">CONFIRM</Link>
           </div>
         </div>
       </form>
