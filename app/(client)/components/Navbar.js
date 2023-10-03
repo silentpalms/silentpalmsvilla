@@ -115,27 +115,27 @@ const Navbar = () => {
         <div className="absolute h-screen z-10 bg-green-800 w-screen left-0 px-4 py-10">
           <div className="flex flex-col mb-5 text-white text-4xl space-y-8 uppercase font-bold">
             <Link href="/" onClick={() => setShow(false)}>
-              Home
+              HOME
             </Link>
-            <Link href="/accomodation" onClick={() => setShow(false)}>
-              Accomodation
+            <Link href="/accomodations" onClick={() => setShow(false)}>
+              ACCOMODATION
             </Link>
             <Link href="/activities" onClick={() => setShow(false)}>
-              Activities
+              ACTIVITIES
             </Link>
 
             <Link href="/gallery" onClick={() => setShow(false)}>
-              Gallery
+              GALLERY
             </Link>
 
             <Link href="/contact" onClick={() => setShow(false)}>
-              Contact
+              CONTACT
             </Link>
           </div>
 
           <div className="mt-12">
             <Link
-              href="/reservation"
+              href="/reservation" onClick={() => setShow(false)}
               className=" text-green-800 bg-white px-4 py-3"
             >
               RESERVATION
