@@ -10,6 +10,7 @@ import Testimonials from "./(client)/components/Testimonials";
 import Video from "./(client)/components/Video";
 import Why from "./(client)/components/Why";
 import Loading from "./(client)/components/Loading";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,9 @@ export default function Home() {
   return (
     <main>
       {loading?(<Loading/>):(
-        <div>
+        <>
+
+<div>
         <Navbar />
         <Hero/>
         <Story/>
@@ -32,6 +35,12 @@ export default function Home() {
         <Review/>
         <Footer/>
       </div>
+        <TawkMessengerReact
+          propertyId="651bac2110c0b2572487f618"
+          widgetId="1hbq1gpbi"
+        />
+        </>
+       
       )}    
     </main>
   );
