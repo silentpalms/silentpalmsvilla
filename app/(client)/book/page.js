@@ -270,11 +270,11 @@ const toDate = results?.toDate
                 <div className="grid grid-cols-2 gap-2  mb-1 w-full md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] relative w-full flex justify-center items-center flex-col">
                     <p className="text-7xl text-white font-bold absolute top-6 left-0">{fromDay}</p>
-                    <p className="text-3xl text-white absolute bottom-3 left-0">{fromMonth}</p>
+                    <p className="text-3xl text-white absolute bottom-0 left-0">{fromMonth}</p>
                   </div>
-                  <div className="bg-green-400 h-[130px] flex justify-center items-center flex-col">
-                    <p className="text-7xl text-white font-bold">{toDay}</p>
-                    <p className="text-3xl text-white">{toMonth}</p>
+                  <div className="bg-green-400 h-[130px] relative flex justify-center items-center flex-col">
+                    <p className="text-7xl text-white font-bold absolute top-6 left-0">{toDay}</p>
+                    <p className="text-3xl text-white bottom-0 left-0">{toMonth}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 md:w-[450px] md:mx-auto">
