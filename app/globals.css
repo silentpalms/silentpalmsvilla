@@ -29,3 +29,8 @@
   .active {
     display: block;
   }
+
+  .tawk-min-container .tawk-button-circle.tawk-button-large {
+    width: 40px !important;
+    height: 40px !important;
+}
