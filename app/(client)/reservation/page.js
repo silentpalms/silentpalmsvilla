@@ -26,7 +26,7 @@ import moment from "moment";
 
 import { useFormik } from "formik";
 import LoadingHouse from "../components/LoadingHouse";
-import Booking from "../components/Booking";
+
 
 const page = () => {
 
