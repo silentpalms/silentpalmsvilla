@@ -104,7 +104,7 @@ const page = () => {
       }
     }
     getMessages();
-  });
+  },[]);
   return (
     <div>
       {!open && (
