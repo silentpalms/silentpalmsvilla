@@ -49,7 +49,7 @@ const Featured = () => {
           </Slider>
         </div>
 
-        <div className="md:pt-12 ">
+        <div className="md:pt-5 ">
           <motion.h2
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 1 }}
@@ -62,7 +62,7 @@ const Featured = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 2, delay: 1 }}
-            className=" max-w-[550px] mt-8"
+            className=" max-w-[550px] pt-5 text-[17px]"
           >
             This luxury accommodation offers fully en-suite rooms, providing a
             private and comfortable space for guests. The rooms feature a
@@ -75,9 +75,9 @@ const Featured = () => {
             allowing the refreshing North wind breeze from the ocean to flow
             into the living room and kitchen area.
           </motion.p>
-          <p className="text-[12px] max-w-[350px] mt-8">Max - 6 Guests</p>
+          <p className="text-[12px] max-w-[350px] pt-5">Max - 6 Guests</p>
 
-          <div className="md:mt-7 mt-4 flex flex-col md:flex-row items-center md:space-x-3 text-green-800">
+          <div className="md:mt-4 mt-4 flex flex-col md:flex-row items-center md:space-x-3 text-green-800">
             <Link href="/reservation" className="text-sm">
               Check Availability
             </Link>

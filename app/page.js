@@ -24,9 +24,13 @@ export default function Home() {
       {loading?(<Loading/>):(
         <>
 
-<div>
-        <Navbar />
-        <Hero/>
+      <div>
+      <div className="fixed top-0 w-full z-10 bg-white border-b-[1px] border-green-800 shadow-md">
+      <Navbar />
+      </div>
+
+      <div className="relative mt-[110px] pt-2 h-full">
+      <Hero/>
         <Story/>
         <Featured/>
         <Why/>
@@ -34,6 +38,9 @@ export default function Home() {
         <Testimonials/>
         <Review/>
         <Footer/>
+      </div>
+      
+      
       </div>
         <TawkMessengerReact
           propertyId="651bac2110c0b2572487f618"
