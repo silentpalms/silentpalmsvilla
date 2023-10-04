@@ -11,13 +11,14 @@ import Video from "./(client)/components/Video";
 import Why from "./(client)/components/Why";
 import Loading from "./(client)/components/Loading";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
+import Poster from "./(client)/components/Poster";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(()=>{
   setTimeout(()=>{
     setLoading(false)
-  }, 5000)
+  }, 5)
   },[])
   return (
     <main>
@@ -37,7 +38,9 @@ export default function Home() {
         <Video/>
         <Testimonials/>
         <Review/>
+        <Poster/>
         <Footer/>
+      
       </div>
       
       
