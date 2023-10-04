@@ -14,11 +14,11 @@ import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import Poster from "./(client)/components/Poster";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(()=>{
   setTimeout(()=>{
     setLoading(false)
-  }, 5)
+  }, 5000)
   },[])
   return (
     <main>
