@@ -51,6 +51,7 @@ export async function PUT(request) {
     if(!booking){
       return NextResponse.json({  'message':"no such booking"})
     }
+    booking.amount=amount
     booking.bookingStatus=bookingStatus
     await booking.save()
     return NextResponse.json({booking}, {status:200})

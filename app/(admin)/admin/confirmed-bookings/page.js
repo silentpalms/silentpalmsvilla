@@ -100,7 +100,7 @@ const page = () => {
           onClick={() => handleCancel(row)}
           id={row._id}
         >
-          Cancel Booking
+          Mark as Pending
         </span>
       ),
 
@@ -174,23 +174,30 @@ const page = () => {
 
   const handleCancel = async (row) => {
     const bookingId = row._id;
+ 
     const houseId = row.houseId;
+    const bookingStatus = "pending"
+    const details = {
+      _id:bookingId,
+      bookingStatus,
+      amount:row.amount
+    }
     try {
       // Make the API call to update the booking status
-      const booking = await axios.put(`/api/allBookings/${bookingId}`);
-      const house = await axios.get(`/api/updateHouse/pending?id=${houseId}`);
-      const monthsArray = house.data.months;
-      for (const month of monthsArray) {
-        const monthId = month._id;
+      const booking = await axios.put(`/api/admin/bookings/`, details);
+      // const house = await axios.get(`/api/updateHouse/pending?id=${houseId}`);
+      // const monthsArray = house.data.months;
+      // for (const month of monthsArray) {
+      //   const monthId = month._id;
 
-        try {
-          const newBookingStatus = await axios.put(
-            `/api/updateHouse/pending?id=${houseId}&monthId=${monthId}`
-          );
-        } catch (error) {
-          console.log("Error updating booking status", error);
-        }
-      }
+      //   try {
+      //     const newBookingStatus = await axios.put(
+      //       `/api/updateHouse/pending?id=${houseId}&monthId=${monthId}`
+      //     );
+      //   } catch (error) {
+      //     console.log("Error updating booking status", error);
+      //   }
+      // }
       // Set handleConfirmTriggered to true to trigger the useEffect
       setHandleCancelTriggered(true);
       // Handle the response or perform any necessary actions
