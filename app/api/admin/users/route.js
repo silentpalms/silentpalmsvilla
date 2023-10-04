@@ -88,6 +88,9 @@ export async function POST(request) {
 
 export async function PUT(request) {
     const body = await request.json();
+    const {id} = body;
+
+    if(!id) return NextResponse.json({  'message':"booking id required"})
    
   }
   

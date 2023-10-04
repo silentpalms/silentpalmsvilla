@@ -173,7 +173,7 @@ const page = () => {
       }
     }
     fetchBookings();
-  }, []);
+  }, [bookings]);
 
   return (
     <div>
