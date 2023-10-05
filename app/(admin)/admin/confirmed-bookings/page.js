@@ -174,7 +174,7 @@ const page = () => {
 
   const handleCancel = async (row) => {
     const bookingId = row._id;
- 
+    const price = row.amount
     const houseId = row.houseId;
     const bookingStatus = "pending"
     const details = {
@@ -185,19 +185,33 @@ const page = () => {
     try {
       // Make the API call to update the booking status
       const booking = await axios.put(`/api/admin/bookings/`, details);
-      // const house = await axios.get(`/api/updateHouse/pending?id=${houseId}`);
-      // const monthsArray = house.data.months;
-      // for (const month of monthsArray) {
-      //   const monthId = month._id;
+      const house = await axios.get(`/api/admin/houses?_id=${houseId}`);    
+      const monthsArray = house.data.house.months;
+   
+   
+      for (const month of monthsArray) {
+        const monthId = month._id;
 
-      //   try {
-      //     const newBookingStatus = await axios.put(
-      //       `/api/updateHouse/pending?id=${houseId}&monthId=${monthId}`
-      //     );
-      //   } catch (error) {
-      //     console.log("Error updating booking status", error);
-      //   }
-      // }
+
+        const details = {
+          id:houseId,
+          monthId,
+          amount:price
+        }
+
+
+        const body ={
+          details
+        }
+
+        try {
+          const newBookingStatus = await axios.put(
+            `/api/admin/houses`,body
+          );
+        } catch (error) {
+          console.log("Error updating booking status", error);
+        }
+      }
       // Set handleConfirmTriggered to true to trigger the useEffect
       setHandleCancelTriggered(true);
       // Handle the response or perform any necessary actions

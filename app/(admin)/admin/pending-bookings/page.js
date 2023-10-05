@@ -207,7 +207,7 @@ const page = () => {
     const bookingId = row._id;
     const bookingStatus = "Confirmed"
     const houseId = row.houseId;
-    const details = {
+    const bookingDetails = {
       amount: price,
       _id:bookingId,
       bookingStatus
@@ -216,22 +216,45 @@ const page = () => {
     
     try {
       // Make the API call to update the booking status
-      const booking = await axios.put(`/api/admin/bookings`, details);
-      // const house = await axios.get(`/api/updateHouse/confirmed?id=${houseId}`);
-      // const monthsArray = house.data.months;
-      // for (const month of monthsArray) {
-      //   const monthId = month._id;
+      const booking = await axios.put(`/api/admin/bookings`, bookingDetails);
+      const house = await axios.get(`/api/admin/houses?_id=${houseId}`); 
+        
+      const monthsArray = house.data.house.months;
+   
+   
+   
+      for (const month of monthsArray) {
+        const monthId = month._id;
+        
 
-      //   try {
-      //     const newBookingStatus = await axios.put(
-      //       `/api/updateHouse/confirmed?id=${houseId}&monthId=${monthId}`
-      //     );
-      //   } catch (error) {
-      //     console.log("Error updating booking status", error);
-      //   }
-      // }
+
+        const details = {
+          id:houseId,
+          monthId,
+          amount:price
+        }
+
+   
+
+
+        const houseDetails ={
+          details
+        }
+
+       
+
+        try {
+          const newBookingStatus = await axios.put(
+            `/api/admin/houses`,houseDetails
+          );
+
+         
+        } catch (error) {
+          console.log("Error updating booking status", error);
+        }
+      }
       // Set handleConfirmTriggered to true to trigger the useEffect
-      setHandleConfirmTriggered(true);
+      // setHandleConfirmTriggered(true);
       // Handle the response or perform any necessary actions
     } catch (error) {
       // Handle errors

@@ -22,20 +22,12 @@ export async function GET(){
 
 export async function PUT(request) {
   const body = await request.json();
-  const {_id,house,
-    houseId,
-    user,
-    fromDate,
-    toDate,
+  const {_id,   
     amount,
-    totalDays,
-    bookingStatus,
-    guests,
-    status,
-    ApprovedBy,
-    month} = body;
+    bookingStatus,  
+    ApprovedBy} = body;
 
-    console.log(body);
+
 
   if(!_id) {
     console.log("Please insert a booking id");
