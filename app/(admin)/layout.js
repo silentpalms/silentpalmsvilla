@@ -91,12 +91,13 @@ const Links = [
   },
 ];
 
-export default function AdminLayout({ children, open, setIsOpen }) {
+export default function AdminLayout({ children }) {
   // const { data: session, status } = useSession();
 
   const session = true;
   const router = useRouter();
   const [reviews, setReviews] = useState(null);
+  const [open, setIsOpen] = useState(false)
 
   const handleLogOut = async () => {
     // await signOut({ callbackUrl: "/admin/login" });
@@ -147,7 +148,7 @@ export default function AdminLayout({ children, open, setIsOpen }) {
           className={`${poppins.className} pt-8 pb-4 px-4 absolute z-50 bg-green-700 h-screen w-full md:hidden`}
         >
           <div className="flex items-center justify-between md:hidden">
-            <div className="h-24 w-24 rounded-full relative">
+            <div className="h-12 w-12 rounded-full relative">
               <Image
                 src="/images/logo.jpeg"
                 fill
@@ -162,13 +163,13 @@ export default function AdminLayout({ children, open, setIsOpen }) {
               <AiOutlineClose />
             </p>
           </div>
-          <ul className="uppercase text-white  pt-16 flex flex-col space-y-6 font-bold">
+          <ul className="uppercase text-white  pt-12 flex flex-col space-y-6 font-bold">
             {Links.slice(0, 6).map((link, index) => {
               return (
                 <li key={index} className="" onClick={() => setIsOpen(!open)}>
                   <Link
                     href={link.link}
-                    className="xs:text-xl text-[45px] flex items-center"
+                    className="xs:text-xl text-[40px] flex items-center"
                   >
                     <span className="text-yellow-400 text-sm ">
                       <p className="h-[35px] w-[35px] mr-3">{link.icon}</p>
@@ -179,7 +180,7 @@ export default function AdminLayout({ children, open, setIsOpen }) {
               );
             })}
           </ul>
-          <div className=" w-fit mt-9 flex justify-center">
+          <div className="w-fit mt-9 flex justify-center">
             <button
               type="button"
               className="bg-black  py-3 w-[180px] flex items-center justify-center text-white text-sm font-semibold"
@@ -195,7 +196,7 @@ export default function AdminLayout({ children, open, setIsOpen }) {
       )}
 
       <aside className="fixed z-10 py-8 h-screen bg-white w-[200px] md:flex flex-col items-center text-center text-black hidden">
-        <div className="relative rounded-full h-20 w-20 border border-green-800">
+        <div className="relative rounded-full h-12 w-12 border border-green-800">
           <Image
             src="/images/logo.jpeg"
             fill
@@ -287,7 +288,7 @@ export default function AdminLayout({ children, open, setIsOpen }) {
       </aside>
       <div className="md:ml-[200px] bg-gray-200  w-full">
         <div className=" flex items-center justify-between px-4 py-6 bg-green-700 md:hidden">
-          <div className="h-24 w-24 rounded-full relative">
+          <div className="h-12 w-12 rounded-full relative">
             <Image
               src="/images/logo.jpeg"
               fill
@@ -296,7 +297,7 @@ export default function AdminLayout({ children, open, setIsOpen }) {
             />
           </div>
           <p
-            className="text-4xl text-white font-bold"
+            className="text-4xl text-white font-bold cursor-pointer"
             onClick={() => setIsOpen(!open)}
           >
             <HiBars3BottomRight />
