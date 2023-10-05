@@ -13,19 +13,27 @@ const poppins = localFont({
   ],
 });
 
-const DeleteReviewModal = ({ hideModal, showModal, openModal, reviewId }) => {
+const DeleteReviewModal = ({ hideModal, showModal, openModal, reviewId, }) => {
+
+
   const [loading, setLoading] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
   const [disabledBtn, setDisabledBtn] = useState(true);
+  
 
   const handleOk = async () => {
     setLoading(true);
     try {
-      await axios.delete(`/api/reviews?id=${reviewId}`);
+
+    const id = reviewId
+     
+      const response = await axios.delete(`/api/admin/reviews?id=${id}`)
+   
       setLoading(false);
       hideModal();
       setInputValue("");
+   
     } catch (err) {
       console.error(err);
     }
@@ -35,6 +43,12 @@ const DeleteReviewModal = ({ hideModal, showModal, openModal, reviewId }) => {
     console.log("Cant Submit");
     return null;
   };
+
+  const handleCancel = ()=>{
+    setLoading(false)
+    hideModal()
+   
+  }
 
   const handleChange = (e) => {
     setInputValue(e?.target?.value);
@@ -61,7 +75,7 @@ const DeleteReviewModal = ({ hideModal, showModal, openModal, reviewId }) => {
                   <Button
                     className="bg-transparent border border-gray-400 rounded-none text-black w-[100px]"
                     key="back"
-                    onClick={hideModal}
+                    onClick={handleCancel}
                   >
                     Cancel
                   </Button>

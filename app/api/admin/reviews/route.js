@@ -23,4 +23,23 @@ export async function GET(){
 
 
 
+export async function DELETE(request){
+  const {searchParams} = new URL(request.url)
+  const id = searchParams.get('id')
+
   
+    if(!id){
+      return NextResponse.json({"message":"Id is required"}, {status:400})
+    }
+  
+    try{
+      await connectMongoDB();
+      let review;
+      review = await Reviews.findByIdAndDelete(id)
+      return NextResponse.json({"message":"Review Deleted Successfully"}, {status:200})
+    }catch(error){
+      return NextResponse.json({"message":"Error occured while connecting "}, {status:500})
+    }
+  
+  
+  }

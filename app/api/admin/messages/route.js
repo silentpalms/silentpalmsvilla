@@ -23,7 +23,24 @@ export async function GET(){
         return NextResponse.json({status:400},{message:"an error occured while trying to connect to the database"})
     }
 }
-
+export async function DELETE(request){
+    const {id} = await request.json()
+  
+    if(!id){
+      return NextResponse.json({"message":"Id is required"}, {status:400})
+    }
+  
+    try{
+      await connectMongoDB();
+      let message;
+      message = await Message.findByIdAndDelete(id)
+      return NextResponse.json({"message":"Message Deleted Successfully"}, {status:200})
+    }catch(error){
+      return NextResponse.json({"message":"Error occured while connecting "}, {status:500})
+    }
+  
+  
+  }
 
 
   

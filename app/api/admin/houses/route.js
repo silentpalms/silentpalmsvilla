@@ -34,8 +34,6 @@ export async function PUT(request) {
         } =
       body;
 
-     
-
     try {
       await connectMongoDB();
       let house;
@@ -54,43 +52,18 @@ export async function PUT(request) {
        
 
       if (targetMonth) {   
-        let updatedHouse
+        
          
         targetMonth.amount= details.newAmount? details.newAmount:targetMonth.amount 
-        const bookingStatus = "Confirmed"
-        targetMonth.bookingStatus = bookingStatus  
-        // if (targetMonth.bookingStatus === "pending") {
-        //   targetMonth.bookingStatus = "Confirmed";
-
-        //   console.log("from pending to confirmed");
-
-        //   updatedHouse = house
-
-        //   await updatedHouse.save()
-          
-
-                
-        // }else if(targetMonth.bookingStatus === "Confirmed"){         
-        //   targetMonth.bookingStatus === "pending" 
-        //   console.log("from confirmed to pending"); 
-          
-        //   updatedHouse = house
-
-        //   await updatedHouse.save()
-        // }
-
        
-             
+        targetMonth.bookingStatus = details.bookingStatus? details.bookingStatus:targetMonth.bookingStatus
+          
      }
       else{
         console.log("No details");
       }
 
-     
-
-     
-                
-      //create a mapping of labels to URLs from the request body images
+    //create a mapping of labels to URLs from the request body images
       const requestImagesMap = {};
 
       requestImages.forEach((image) => {
@@ -112,12 +85,7 @@ export async function PUT(request) {
       house.description = details.description ? details.description : house.description;
       house.noOfGuests = details.noOfGuests ? details.noOfGuests : house.noOfGuests;
 
-     
-
-     
-
-
-
+  
       await house.save()
   
       return NextResponse.json(

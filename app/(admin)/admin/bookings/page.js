@@ -94,27 +94,16 @@ const page = () => {
       name: "Action",
       ignoreRowClick: true,
       cell: (row) => {
-        if (row.bookingStatus === "Confirmed") {
+      
           return (
             <span
               className="text-red-500 font-bold underline cursor-pointer"
-              onClick={() => handleAction(row)}
+              onClick={() => handleDelete(row)}
               id={row._id}
             >
-              Cancel Booking
+              Delete Booking
             </span>
           );
-        } else if (row.bookingStatus === "pending") {
-          return (
-            <span
-              className="text-green-500 font-bold underline cursor-pointer"
-              onClick={() => handleAction(row)}
-              id={row._id}
-            >
-              Approve
-            </span>
-          );
-        }
       },
 
       button: true,
@@ -174,6 +163,20 @@ const page = () => {
     }
     fetchBookings();
   }, [bookings]);
+
+  const handleDelete = async(row)=>{
+
+    const id = row._id
+    try {
+      const response = await axios.delete(`/api/admin/bookings?id=${id}`)
+      console.log(response);
+
+    } catch (error) {
+      console.log(error);
+      return
+    }
+
+  }
 
   return (
     <div>

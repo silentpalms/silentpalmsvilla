@@ -86,11 +86,23 @@ export async function POST(request) {
 
 
 
-export async function PUT(request) {
-    const body = await request.json();
-    const {id} = body;
-
-    if(!id) return NextResponse.json({  'message':"booking id required"})
-   
+  export async function DELETE(request){
+    const {searchParams} = new URL(request.url)
+    const id = searchParams.get('id')
+  
+    if(!id){
+      return NextResponse.json({"message":"Id is required"}, {status:400})
+    }
+  
+    try{
+      await connectMongoDB();
+      let user;
+      user = await User.findByIdAndDelete(id)
+      return NextResponse.json({"message":"User Deleted Successfully"}, {status:200})
+    }catch(error){
+      return NextResponse.json({"message":"Error occured while connecting "}, {status:500})
+    }
+  
+  
   }
   

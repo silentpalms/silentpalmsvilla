@@ -185,8 +185,17 @@ const page = () => {
     try {
       // Make the API call to update the booking status
       const booking = await axios.put(`/api/admin/bookings/`, details);
-      const house = await axios.get(`/api/admin/houses?_id=${houseId}`);    
-      const monthsArray = house.data.house.months;
+      const house = await axios.get(`/api/admin/houses?_id=${houseId}`);
+      const houseData = house.data.house    
+      const monthsArray = houseData.months;
+      const title = houseData.title;
+      const houseAmount = houseData.amount
+      const description = houseData.description
+      const imageUrls = houseData.imageUrls
+      const noOfGuests = houseData.noOfGuests
+      const roomType = houseData.roomTYpe
+      const images = houseData.images
+      const currentBookings = houseData.currentBookings
    
    
       for (const month of monthsArray) {
@@ -196,12 +205,22 @@ const page = () => {
         const details = {
           id:houseId,
           monthId,
-          amount:price
+          newAmount:price,
+          bookingStatus,
+          title,
+          amount:houseAmount,
+          description,
+          imageUrls,
+          noOfGuests,
+          roomType,
+          currentBookings,
+          months:monthsArray
         }
 
 
         const body ={
-          details
+          details,
+          images
         }
 
         try {

@@ -218,27 +218,50 @@ const page = () => {
       // Make the API call to update the booking status
       const booking = await axios.put(`/api/admin/bookings`, bookingDetails);
       const house = await axios.get(`/api/admin/houses?_id=${houseId}`); 
+    
+     const houseData = house.data.house
         
-      const monthsArray = house.data.house.months;
+      const monthsArray = houseData.months;
+      const title = houseData.title;
+      const houseAmount = houseData.amount
+      const description = houseData.description
+      const imageUrls = houseData.imageUrls
+      const noOfGuests = houseData.noOfGuests
+      const roomType = houseData.roomTYpe
+      const images = houseData.images
+      const currentBookings = houseData.currentBookings
+     
+      const bookingStatus="Confirmed"
    
    
    
       for (const month of monthsArray) {
         const monthId = month._id;
+
         
 
 
         const details = {
           id:houseId,
           monthId,
-          amount:price
+          newAmount:price,
+          bookingStatus,
+          title,
+          amount:houseAmount,
+          description,
+          imageUrls,
+          noOfGuests,
+          roomType,
+          currentBookings,
+          months:monthsArray
         }
 
    
 
 
         const houseDetails ={
-          details
+          details,
+          images
         }
 
        
@@ -254,7 +277,7 @@ const page = () => {
         }
       }
       // Set handleConfirmTriggered to true to trigger the useEffect
-      // setHandleConfirmTriggered(true);
+      setHandleConfirmTriggered(true);
       // Handle the response or perform any necessary actions
     } catch (error) {
       // Handle errors

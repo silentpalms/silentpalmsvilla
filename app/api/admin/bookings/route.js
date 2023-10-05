@@ -56,3 +56,24 @@ export async function PUT(request) {
  
 }
 
+
+export async function DELETE(request){
+  const {searchParams} = new URL(request.url)
+    const id = searchParams.get('id')
+
+  if(!id){
+    return NextResponse.json({"message":"Id is required"}, {status:400})
+  }
+
+  try{
+    await connectMongoDB();
+    let booking;
+    booking = await Bookings.findByIdAndDelete(id)
+    return NextResponse.json({"message":"Booking Deleted Successfully"}, {status:200})
+  }catch(error){
+    return NextResponse.json({"message":"Error occured while connecting "}, {status:500})
+  }
+
+
+}
+

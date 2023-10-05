@@ -38,6 +38,7 @@ const Reviews = () => {
   const [openApproveModal, setOpenApproveModal] = useState(false);
   const [reviewId, setReviewId] = useState("");
   const [reviewStatus, setReviewStatus] = useState("");
+  const [handleDeleteTriggered, setHandleDeleteTriggered] = useState(false)
   const showReviewModal = () => {
     setOpenReviewModal(true);
   };
@@ -179,7 +180,7 @@ const Reviews = () => {
       }
     }
     getReviews();
-  }, [reviews]);
+  }, [reviews, handleDeleteTriggered]);
   return (
     <AdminLayout open={open} setIsOpen={setIsOpen}>
       {!open && (
@@ -203,6 +204,8 @@ const Reviews = () => {
         showReviewModal={showReviewModal}
         hideModal={hideReviewModal}
         reviewId={reviewId}
+        handleDeleteTriggered={handleDeleteTriggered}
+        setHandleDeleteTriggered={()=>setHandleDeleteTriggered(false)}
       />
       <ApproveReviewModal
         openModal={openApproveModal}
