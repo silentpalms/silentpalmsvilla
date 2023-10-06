@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-// import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Badge } from "antd";
 
@@ -92,40 +92,40 @@ const Links = [
 ];
 
 export default function AdminLayout({ children }) {
-  // const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
-  const session = true;
+
   const router = useRouter();
   const [reviews, setReviews] = useState(null);
   const [open, setIsOpen] = useState(false)
 
   const handleLogOut = async () => {
-    // await signOut({ callbackUrl: "/admin/login" });
+    await signOut({ callbackUrl: "/login" });
   };
 
-  // useEffect(() => {
-  //   const getReviews = async () => {
-  //     try {
-  //       if (session) {
-  //         let res = await axios.get(
-  //           `${process.env.NEXT_PUBLIC_API}/api/review`
-  //         );
-  //         const allReviews = res.data;
-  //         const unreadReviews = allReviews.filter(
-  //           (review) => review.readStatus === false
-  //         );
+  useEffect(() => {
+    const getReviews = async () => {
+      try {
+        if (session) {
+          let res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API}/api/review`
+          );
+          const allReviews = res.data;
+          const unreadReviews = allReviews.filter(
+            (review) => review.readStatus === false
+          );
 
-  //         setReviews(unreadReviews.length);
-  //       } else {
-  //         router.push("/admin/login");
-  //       }
-  //     } catch (error) {
-  //       console.log("Error in getting reviews");
-  //       return;
-  //     }
-  //   };
-  //   getReviews();
-  // }, []);
+          setReviews(unreadReviews.length);
+        } else {
+          router.push("/login");
+        }
+      } catch (error) {
+        console.log("Error in getting reviews");
+        return;
+      }
+    };
+    getReviews();
+  }, []);
 
   // if (status === "loading") {
   //   return (

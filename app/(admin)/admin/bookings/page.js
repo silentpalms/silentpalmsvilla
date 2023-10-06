@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import localFont from "next/font/local";
+import DeleteBookingModal from "../../components/DeleteBookingModal";
 const poppins = localFont({
   src: [
     {
@@ -35,6 +36,14 @@ const page = () => {
   const [bookings, setBookings] = useState([]);
   const [open, setIsOpen] = useState(false);
   const [price, setPrice] = useState(null);
+  const [openBookingModal, setOpenBookingModal] = useState(false);
+  const [bookingId, setBookingId] = useState("")
+  const showBookingModal = () => {
+    setOpenBookingModal(true);
+  };
+
+
+ 
 
   const columns = [
     {
@@ -164,17 +173,9 @@ const page = () => {
     fetchBookings();
   }, [bookings]);
 
-  const handleDelete = async(row)=>{
-
-    const id = row._id
-    try {
-      const response = await axios.delete(`/api/admin/bookings?id=${id}`)
-      console.log(response);
-
-    } catch (error) {
-      console.log(error);
-      return
-    }
+  const handleDelete =(row)=>{
+    showBookingModal(row._id)
+    setBookingId(row._id)
 
   }
 
@@ -195,6 +196,15 @@ const page = () => {
           </div>
         </div>
       )}
+
+      <DeleteBookingModal
+      openModal={openReviewModal}
+      showReviewModal={showReviewModal}
+      hideModal={hideReviewModal}
+      bookingId={bookingId}
+      
+      
+      />
     </div>
   );
 };
