@@ -333,7 +333,7 @@ const toDate = results?.toDate
                       I acknowledge the payment terms and conditions.
                     </p>
                   </div>
-                  <div className="my-7 text-center">
+                  <div className=" text-center">
                     <button
                       onClick={handlePost}
                       disabled={disabled}

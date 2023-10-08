@@ -50,7 +50,7 @@ const page = () => {
  
 
 
-  console.log(filteredHouses);
+
 
   
 
@@ -588,7 +588,7 @@ function HouseForm({
     setIsOpen,
   }) {
 
-    const guests = adults+child
+    const guests = parseInt(adults)+parseInt(child)
 
    
     const validate = (values) => {

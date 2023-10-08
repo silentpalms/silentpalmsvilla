@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
+import { useSession} from "next-auth/react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import localFont from "next/font/local";
@@ -35,6 +36,8 @@ const poppins = localFont({
 
 
 const page = () => {
+  const { data: session, status } = useSession();
+
   const [bookings, setBookings] = useState([]);
   const [amount, setAmount] = useState(null);
   const [handleConfirmTriggered, setHandleConfirmTriggered] = useState(false);
@@ -42,6 +45,10 @@ const page = () => {
   const [editedRow, setEditedRow] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [toggle, setToggle] = useState(true);
+
+  const user = session?.user?.validateUser?.username;
+
+
 
   const handleEdit = (row) => {
     setEditedRow(row);
@@ -210,7 +217,8 @@ const page = () => {
     const bookingDetails = {
       amount: price,
       _id:bookingId,
-      bookingStatus
+      bookingStatus,
+      ApprovedBy:user
 
     };
     

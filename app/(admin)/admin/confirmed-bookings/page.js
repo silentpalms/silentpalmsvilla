@@ -177,10 +177,12 @@ const page = () => {
     const price = row.amount
     const houseId = row.houseId;
     const bookingStatus = "pending"
+    const ApprovedBy= "Not Approved"
     const details = {
       _id:bookingId,
       bookingStatus,
-      amount:row.amount
+      amount:row.amount,
+      ApprovedBy
     }
     try {
       // Make the API call to update the booking status

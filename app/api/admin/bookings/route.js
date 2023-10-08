@@ -45,6 +45,7 @@ export async function PUT(request) {
     }
     booking.amount=amount
     booking.bookingStatus=bookingStatus
+    booking.ApprovedBy=ApprovedBy
     await booking.save()
     return NextResponse.json({booking}, {status:200})
   }catch(error){

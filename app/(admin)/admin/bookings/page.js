@@ -42,6 +42,10 @@ const page = () => {
     setOpenBookingModal(true);
   };
 
+  const hideBookingModal = () => {
+    setOpenBookingModal(false);
+  };
+
 
  
 
@@ -198,9 +202,9 @@ const page = () => {
       )}
 
       <DeleteBookingModal
-      openModal={openReviewModal}
-      showReviewModal={showReviewModal}
-      hideModal={hideReviewModal}
+      openModal={openBookingModal}
+      showBookingModal={showBookingModal}
+      hideModal={hideBookingModal}
       bookingId={bookingId}
       
       

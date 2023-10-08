@@ -95,6 +95,7 @@ export default function AdminLayout({ children }) {
   const { data: session, status } = useSession();
 
 
+
   const router = useRouter();
   const [reviews, setReviews] = useState(null);
   const [open, setIsOpen] = useState(false)
@@ -108,9 +109,9 @@ export default function AdminLayout({ children }) {
       try {
         if (session) {
           let res = await axios.get(
-            `${process.env.NEXT_PUBLIC_API}/api/review`
+            `${process.env.NEXT_PUBLIC_API}/api/admin/reviews`
           );
-          const allReviews = res.data;
+          const allReviews = res.data.reviews;
           const unreadReviews = allReviews.filter(
             (review) => review.readStatus === false
           );
@@ -304,6 +305,7 @@ export default function AdminLayout({ children }) {
           </p>
         </div>
         {children}
+        
       </div>
     </div>
   );
