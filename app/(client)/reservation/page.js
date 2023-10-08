@@ -250,6 +250,18 @@ const page = () => {
 
   const handleOpen = (event, houseId) => {
     event.preventDefault();
+    if (houseId === "64cb7016749814f1a4db72d2") {
+      return; // do nothing
+    }else if(houseId === "64cb85de749814f1a4db72e0"){
+      return
+    }else if(houseId === "64cb8590749814f1a4db72de"){
+      return
+    }
+    else if(houseId === "64cb8c90749814f1a4db72e7"){
+      return
+    }else if(houseId === "64cb74f8749814f1a4db72d4"){
+      return
+    }
     setIsOpen((prevOpen) => (prevOpen === houseId ? false : houseId));
   };
   

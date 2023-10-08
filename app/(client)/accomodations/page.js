@@ -162,8 +162,8 @@ const page = () => {
             </div>
             <div></div>
             <Link
-              href="/reservation"
-              className="text-white text-center bg-green-800 px-2 py-2 w-[130px] mt-4 md:mt-0"
+              href="#"
+              className="text-white text-center bg-gray-300 cursor-none px-2 py-2 w-[130px] mt-4 md:mt-0"
             >
               BOOK NOW
             </Link>
@@ -217,8 +217,8 @@ const page = () => {
             </div>
             <div></div>
             <Link
-              href="/reservation"
-              className="text-white text-center bg-green-800 px-2 py-2 w-[130px] mt-4 md:mt-0"
+              href="#"
+              className="text-white text-center bg-gray-300 cursor-none px-2 py-2 w-[130px] mt-4 md:mt-0"
             >
               BOOK NOW
             </Link>
