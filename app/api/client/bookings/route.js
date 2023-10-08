@@ -8,6 +8,7 @@ import moment from "moment";
 
 export async function POST(request){
     const body = await request.json()
+    console.log(body);
 
 
     const { fromDate, toDate, house, user, amount, totalDays, houseId, guests } =
@@ -26,8 +27,9 @@ export async function POST(request){
           guests,
         });
         const booking = await newBooking.save();
+        let houseTemp;
     
-        const houseTemp = await House.findById(houseId);
+        houseTemp = await House.findById(houseId);
     
         if (!houseTemp) {
           return NextResponse.json({ message: "House not found" }, {status:404});
@@ -35,7 +37,7 @@ export async function POST(request){
     
         const bookingAmount = amount;
         if (houseTemp) {
-          const id = houseTemp._id.toString();
+          let id = houseTemp._id.toString();
     
           if (id === "64cb76d7749814f1a4db72d6") {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
@@ -56,6 +58,8 @@ export async function POST(request){
               toDate,
               status: booking.status,
             });
+
+            await houseTemp.save(); 
     
             const house2 = await House.findById("64cb85de749814f1a4db72e0");
             if (house2) {
@@ -87,6 +91,8 @@ export async function POST(request){
               toDate,
               status: booking.status,
             });
+
+            await houseTemp.save();
     
             const house2 = await House.findById("64cb76d7749814f1a4db72d6");
             if (house2) {
@@ -118,6 +124,8 @@ export async function POST(request){
               toDate,
               status: booking.status,
             });
+
+            await houseTemp.save();
     
             const house2 = await House.findById("64cb8590749814f1a4db72de");
             if (house2) {
@@ -149,6 +157,8 @@ export async function POST(request){
               toDate,
               status: booking.status,
             });
+
+            await houseTemp.save();
     
             const house2 = await House.findById("64cb781f749814f1a4db72da");
             if (house2) {
