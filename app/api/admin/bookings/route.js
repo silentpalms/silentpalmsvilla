@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Bookings from "@/models/BookingModel";
 import { connectMongoDB } from "@/lib/MongoConnect";
+import House from "@/models/HouseModel";
 
 export async function GET(){
  try {
@@ -43,7 +44,7 @@ export async function PUT(request) {
     if(!booking){
       return NextResponse.json({  'message':"no such booking"})
     }
-    booking.amount=amount
+    booking.amount += amount
     booking.bookingStatus=bookingStatus
     booking.ApprovedBy=ApprovedBy
     await booking.save()
