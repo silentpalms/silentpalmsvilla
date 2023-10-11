@@ -271,17 +271,17 @@ const toDate = results?.toDate
                
                 <div className="grid grid-cols-2 gap-2 relative  mb-1 w-full md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white font-bold mb-0 absolute left-0 top-2 left-1/2 -translate-x-1/2">{fromDay}</p>
+                    <p className="text-7xl text-white font-bold mb-0 absolute  top-2 left-1/2 -translate-x-1/2">{fromDay}</p>
                     <p className="text-2xl text-white absolute mb-0 bottom-0 left-1/2 -translate-x-1/2">{fromMonth}</p>
                   </div>
                   <div className="bg-green-400 h-[130px] relative">
                     <p className="text-7xl text-white font-bold mb-0 absolute top-2 left-1/2 -translate-x-1/2">{toDay}</p>
-                    <p className="text-2xl text-white absolute mb-0 bottom-0 left-0 left-1/2 -translate-x-1/2">{toMonth}</p>
+                    <p className="text-2xl text-white absolute mb-0 bottom-0  left-1/2 -translate-x-1/2">{toMonth}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2 relative md:w-[450px] md:mx-auto">
                   <div className="bg-green-400 h-[130px] relative">
-                    <p className="text-7xl text-white absolute mb-0 left-0 font-bold top-2 left-1/2 -translate-x-1/2">
+                    <p className="text-7xl text-white absolute mb-0  font-bold top-2 left-1/2 -translate-x-1/2">
                       <FaUsers />
                     </p>
 

@@ -23,33 +23,25 @@ export default function SimpleCharts() {
 
 
 
+ 
+
   // Create datasets for each house
   const datasets = housesArray.map((house, index) => {
-    const data = monthNames.map((month) => {
+    const data = monthArray.map((month) => {
       const matchingMonths = house.months.filter(
         (monthData) => monthData.name === month && monthData.bookingStatus === "Confirmed"
       );
-
-      if (matchingMonths.length > 0) {
-       
-        const totalAmount = matchingMonths.reduce((total, monthData) => total + monthData.amount,0);
-
-      
-    
-        return totalAmount
-      } else {
-       
-        return 0; // Set the total amount to 0 if there are no matching months.
-      }
+  
+      const totalAmount = matchingMonths.reduce((total, monthData) => total + monthData.amount, 0);
+  
+      return totalAmount;
     });
-
+  
     return {
       title: house.title,
       data,
     };
   });
-
-
 
 
 
@@ -66,31 +58,29 @@ export default function SimpleCharts() {
 
   const chartdata = monthNames.map((monthName, index) => {
     const dataObj = {
-      name: monthName,
+      month: monthName,
     };
 
+   
 
-  
     datasets.forEach((dataset) => {
       const houseTitle = dataset.title;
       const houseSplit = houseTitle.split(" ");
       const modifiedHouseTitle =
         houseSplit[2] + " " + houseSplit[houseSplit.length - 1].slice(-2);
 
+    
+
       const data = dataset.data[index];
- 
- 
      
 
-      dataObj[modifiedHouseTitle] = data ? data : 0;
+      dataObj[modifiedHouseTitle] = data ? data.amount : 0;
     });
 
     return dataObj;
   });
 
-
-
-
+ 
 
   useEffect(() => {
     async function getHouses() {
@@ -112,7 +102,7 @@ export default function SimpleCharts() {
         <BarChart
           className="pt-2"
           data={chartdata}
-          index="name"
+          index="month"
           categories={houseTitles}
           colors={[
             "red",

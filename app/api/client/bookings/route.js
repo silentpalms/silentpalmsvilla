@@ -4,14 +4,17 @@ import Bookings from "@/models/BookingModel";
 import House from "@/models/HouseModel";
 import moment from "moment";
 
+export async function GET() {
+return NextResponse.json({message:"This method is not allowed"},{status:405},{headers:"Allow: GET"})
 
+}
 
 export async function POST(request){
     const body = await request.json()
     console.log(body);
 
 
-    const { fromDate, toDate, house, user, amount, totalDays, houseId, guests } =
+    const { fromDate, toDate, house, user, amount, totalDays, houseId, guests, } =
     body
 
     try {
@@ -27,6 +30,8 @@ export async function POST(request){
           guests,
         });
         const booking = await newBooking.save();
+
+        console.log(booking);
         let houseTemp;
     
         houseTemp = await House.findById(houseId);
@@ -41,17 +46,12 @@ export async function POST(request){
     
           if (id === "64cb76d7749814f1a4db72d6") {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
-            const monthObject = houseTemp.months.find((m) => m.name === month);
-    
-            if (monthObject) {
-              monthObject.amount += bookingAmount;
-            } else {
-              houseTemp.months.push({
-                name: month,
-                amount: bookingAmount,
-                bookingStatus: booking.bookingStatus,
-              });
-            }
+            houseTemp.months.push({
+              name: month,
+              amount: bookingAmount,
+              bookingStatus: booking.bookingStatus,
+              bookingId: booking._id,
+            });
             houseTemp.currentBookings.push({
               bookingId: booking._id,
               fromDate,
@@ -74,17 +74,12 @@ export async function POST(request){
             return NextResponse.json({message:"Booking confirmed "}, {status:200})
           } else if (id === "64cb85de749814f1a4db72e0") {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
-            const monthObject = houseTemp.months.find((m) => m.name === month);
-    
-            if (monthObject) {
-              monthObject.amount += bookingAmount;
-            } else {
-              houseTemp.months.push({
-                name: month,
-                amount: bookingAmount,
-                bookingStatus: booking.bookingStatus,
-              });
-            }
+            houseTemp.months.push({
+              name: month,
+              amount: bookingAmount,
+              bookingStatus: booking.bookingStatus,
+              bookingId: booking._id,
+            });
             houseTemp.currentBookings.push({
               bookingId: booking._id,
               fromDate,
@@ -107,17 +102,13 @@ export async function POST(request){
             return NextResponse.json({message:"Booking confirmed "}, {status:200})
           } else if (id === "64cb781f749814f1a4db72da") {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
-            const monthObject = houseTemp.months.find((m) => m.name === month);
-    
-            if (monthObject) {
-              monthObject.amount += bookingAmount;
-            } else {
-              houseTemp.months.push({
-                name: month,
-                amount: bookingAmount,
-                bookingStatus: booking.bookingStatus,
-              });
-            }
+      
+            houseTemp.months.push({
+              name: month,
+              amount: bookingAmount,
+              bookingStatus: booking.bookingStatus,
+              bookingId: booking._id,
+            });
             houseTemp.currentBookings.push({
               bookingId: booking._id,
               fromDate,
@@ -140,17 +131,12 @@ export async function POST(request){
             return NextResponse.json({message:"Booking confirmed "}, {status:200})
           } else if (id === "64cb8590749814f1a4db72de") {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
-            const monthObject = houseTemp.months.find((m) => m.name === month);
-    
-            if (monthObject) {
-              monthObject.amount += bookingAmount;
-            } else {
-              houseTemp.months.push({
-                name: month,
-                amount: bookingAmount,
-                bookingStatus: booking.bookingStatus,
-              });
-            }
+            houseTemp.months.push({
+              name: month,
+              amount: bookingAmount,
+              bookingStatus: booking.bookingStatus,
+              bookingId: booking._id,
+            });
             houseTemp.currentBookings.push({
               bookingId: booking._id,
               fromDate,
@@ -173,17 +159,12 @@ export async function POST(request){
             return NextResponse.json({message:"Booking confirmed "}, {status:200})
           } else {
             const month = moment(fromDate, "DD-MM-YYYY").format("MMMM");
-            const monthObject = houseTemp.months.find((m) => m.name === month);
-    
-            if (monthObject) {
-              monthObject.amount += bookingAmount;
-            } else {
-              houseTemp.months.push({
-                name: month,
-                amount: bookingAmount,
-                bookingStatus: booking.bookingStatus,
-              });
-            }
+            houseTemp.months.push({
+              name: month,
+              amount: bookingAmount,
+              bookingStatus: booking.bookingStatus,
+              bookingId: booking._id,
+            });
             houseTemp.currentBookings.push({
               bookingId: booking._id,
               fromDate,

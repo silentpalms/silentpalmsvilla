@@ -109,7 +109,7 @@ export default function AdminLayout({ children }) {
       try {
         if (session) {
           let res = await axios.get(
-            `${process.env.NEXT_PUBLIC_API}/api/admin/reviews`
+            `/api/admin/reviews`
           );
           const allReviews = res.data.reviews;
           const unreadReviews = allReviews.filter(
@@ -146,7 +146,7 @@ export default function AdminLayout({ children }) {
     <div className={`flex ${poppins.className}`}>
       {open && (
         <div
-          className={`${poppins.className} pt-8 pb-4 px-4 absolute z-50 bg-green-700 h-screen w-full md:hidden`}
+          className={`${poppins.className} pt-6 pb-4 px-4 absolute z-50 bg-green-700 h-screen w-full md:hidden`}
         >
           <div className="flex items-center justify-between md:hidden">
             <div className="h-12 w-12 rounded-full relative">

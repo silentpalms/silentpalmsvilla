@@ -69,12 +69,12 @@ const page = () => {
       name: "House",
       selector: (row) => row.house,
       sortable: true,
-      minWidth: "180px",
+      minWidth: "300px",
     },
     {
       name: "House ID",
       selector: (row) => row.houseId,
-      minWidth: "180px",
+      minWidth: "220px",
     },
 
     {
@@ -84,13 +84,15 @@ const page = () => {
     {
       name: "Phone No.",
       selector: (row) => row.user.phoneNumber,
+      minWidth: "150px",
     },
 
     {
       name: "Days",
       selector: (row) => row.totalDays,
       sortable: true,
-      maxWidth: "10px",
+      width: "80px",
+     
     },
     {
       name: "Amount",
@@ -101,11 +103,12 @@ const page = () => {
             type="text"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="border py-1 border-black px-1 w-[100px]"
+            className="border py-1 border-black px-1 min-w-[80px]"
           />
         ) : (
           row.amount
         ),
+      minWidth: "100px",
     },
     {
       name: "From",
@@ -120,6 +123,7 @@ const page = () => {
     {
       name: "Email",
       selector: (row) => row.user.email,
+      minWidth: "250px",
     },
     {
       name: "Booking Status",
@@ -239,7 +243,7 @@ const page = () => {
       const images = houseData.images
       const currentBookings = houseData.currentBookings
      
-      const bookingStatus="Confirmed"
+     
    
    
    
@@ -261,7 +265,8 @@ const page = () => {
           noOfGuests,
           roomType,
           currentBookings,
-          months:monthsArray
+          months:monthsArray,
+          bookingId
         }
 
    
@@ -271,6 +276,8 @@ const page = () => {
           details,
           images
         }
+
+        
 
        
 

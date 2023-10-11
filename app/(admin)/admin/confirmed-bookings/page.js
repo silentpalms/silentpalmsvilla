@@ -225,6 +225,8 @@ const page = () => {
           images
         }
 
+       
+
         try {
           const newBookingStatus = await axios.put(
             `/api/admin/houses`,body

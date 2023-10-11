@@ -29,6 +29,7 @@ export async function GET(request){
 
 export async function PUT(request) {
     const body = await request.json();
+  
     const { details,
         images: requestImages, //Destructure the images array directly from req.body
         } =
@@ -52,12 +53,12 @@ export async function PUT(request) {
        
 
       if (targetMonth) {   
-        
-         
-        targetMonth.amount= details.newAmount? details.newAmount:targetMonth.amount 
-       
-        targetMonth.bookingStatus = details.bookingStatus? details.bookingStatus:targetMonth.bookingStatus
-          
+        if(targetMonth.bookingId === details.bookingId){
+          targetMonth.amount= details.newAmount? details.newAmount:targetMonth.amount 
+          targetMonth.bookingStatus = details.bookingStatus? details.bookingStatus:targetMonth.bookingStatus
+
+        }
+      
      }
       else{
         console.log("No details");

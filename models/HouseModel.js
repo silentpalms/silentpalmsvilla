@@ -26,8 +26,11 @@ const houseSchema = new Schema(
         name: String,
         amount: Number,
         bookingStatus: String,
+        bookingId: String,
       },
     ],
+
+    
   },
   {
     timestamps: true,

@@ -198,11 +198,11 @@ const page = () => {
     <div>
       {!open && (
         <div
-          className={`${poppins.className} pt-12 px-4 bg-gray-50 h-full w-full`}
+          className={`${poppins.className} pt-6 px-4 bg-gray-50 h-full w-full`}
         >
           <h5 className="text-xl font-bold text-black">DASHBOARD</h5>
           <p className={` text-black`}>Welcome to your DashBoard</p>
-          <div className="pt-12">
+          <div className="pt-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className=" shadow-xl p-4 bg-white md:hover:scale-110 text-black hover:shadow-2xl cursor-pointer transition duration-200 ease-in-out hover:bg-white hover:text-black ">
                 <div className="flex items-center w-full justify-between md:border-b-[0.8px] md:pb-8 md:pl-2">
