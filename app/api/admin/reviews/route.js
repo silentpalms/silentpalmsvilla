@@ -25,11 +25,11 @@ export async function GET() {
 
 export async function PUT(request) {
   const body = await request.json();
-  const { reviewStatus, reviewId } = body;
+  const { reviewStatus, reviewId, readStatus } = body;
 
-  if (!reviewStatus || !reviewId) {
+  if (!reviewId) {
     return NextResponse.json(
-      { message: "reviewStatus and reviewId are required" },
+      { message: "a reviewId is required" },
       { status: 400 }
     );
   }
@@ -43,6 +43,12 @@ export async function PUT(request) {
       }
       if (reviewStatus === "Pending") {
         review.reviewStatus = "Approved";
+      }
+
+      if (readStatus === false) {
+        review.readStatus = true;
+      } else {
+        review.readStatus = false;
       }
 
       await review.save();

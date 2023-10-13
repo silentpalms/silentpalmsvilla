@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -31,7 +31,6 @@ const poppins = localFont({
     },
   ],
 });
-
 
 const page = () => {
   const [reviews, setReviews] = useState([]);
@@ -70,6 +69,7 @@ const page = () => {
       setReviewStatus("Pending");
     }
   };
+
   const ExpandableComponent = ({ data }) => {
     return (
       <div className="p-4 ">
@@ -161,12 +161,13 @@ const page = () => {
 
     const status = {
       readStatus,
+      reviewId,
     };
 
     try {
-      await axios.put(`/api/reviews?id=${reviewId}`, status);
+      await axios.put(`/api/admin/reviews`, status);
     } catch (error) {
-      alert("Something went wrong");
+      console.log("Something went wrong");
     }
   };
 
@@ -213,7 +214,6 @@ const page = () => {
         reviewId={reviewId}
         reviewStatus={reviewStatus}
       />
-     
     </div>
   );
 };
