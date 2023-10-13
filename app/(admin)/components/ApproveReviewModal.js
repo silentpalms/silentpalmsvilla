@@ -29,9 +29,10 @@ const ApproveReviewModal = ({
 
     const details = {
       reviewStatus,
+      reviewId,
     };
     try {
-      await axios.put(`/api/reviews?id=${reviewId}`, details);
+      await axios.put(`/api/admin/reviews`, details);
       setLoading(false);
       hideModal();
       setDisabledBtn(true);

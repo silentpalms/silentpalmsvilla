@@ -11,13 +11,14 @@ import {
   UsersIcon,
   ClipboardDocumentCheckIcon,
   HomeModernIcon,
-  BanknotesIcon,
+  PhotoIcon,
   CalendarDaysIcon,
   ChatBubbleLeftIcon,
   ArrowRightOnRectangleIcon,
   InboxArrowDownIcon,
 } from "@heroicons/react/24/solid";
 import { AiOutlineClose } from "react-icons/ai";
+
 import { HiBars3BottomRight } from "react-icons/hi2";
 import localFont from "next/font/local";
 import { useEffect, useState } from "react";
@@ -77,6 +78,11 @@ const Links = [
     title: "Users",
     link: "/admin/users",
     icon: <UsersIcon />,
+  },
+  {
+    title: "Images",
+    link: "/admin/images",
+    icon: <PhotoIcon />,
   },
   {
     title: "Messages",
@@ -226,7 +232,7 @@ export default function AdminLayout({ children }) {
             </ul>
             <ul className=" mt-16 flex flex-col space-y-5">
               <p className="text-sm underline mb-2 shadow-lg">MANAGEMENT</p>
-              {Links.slice(1, 5).map((link) => {
+              {Links.slice(1, 6).map((link) => {
                 return (
                   <li key={link.title}>
                     <Link
@@ -246,7 +252,7 @@ export default function AdminLayout({ children }) {
             </ul>
             <ul className=" mt-16 flex flex-col space-y-5">
               <p className="text-sm underline mb-2 shadow-lg">ORGANISATION</p>
-              {Links.slice(5, 9).map((link) => {
+              {Links.slice(6, 9).map((link) => {
                 return (
                   <li key={link.title}>
                     <Link
