@@ -10,25 +10,11 @@ const getBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
-const ImagesUpload = ({ name, images, cloudname, uploadpreset }) => {
-  console.log(images);
-  let imageList;
-
-  imageList = images?.map((image, index) => {
-    return {
-      uid: index,
-      name: "image.png",
-      status: "done",
-      url: image,
-    };
-  });
-
-  console.log(imageList);
-
+const ImagesUpload = ({ name, cloudname, uploadpreset }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState(imageList);
+  const [fileList, setFileList] = useState();
   const [openImageModal, setOpenImageModal] = useState(false);
   const [imageDetails, setImageDetails] = useState([
     {

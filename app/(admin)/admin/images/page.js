@@ -6,27 +6,57 @@ import Tab from "@mui/joy/Tab";
 import TabPanel from "@mui/joy/TabPanel";
 import ImagesUpload from "../../components/ImagesUpload";
 import axios from "axios";
-
 import { Image } from "antd";
-
 import { useState, useEffect } from "react";
 import { Space } from "antd";
+import DeleteImageModal from "../../components/DeleteImageModal";
 
 const page = () => {
   const [coverImages, setCoverImages] = useState([]);
   const [accomodationImages, setAccomodationImages] = useState([]);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [handleConfirmedTriggered, setHandleConfirmedTriggered] =
+    useState(false);
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
 
-  const handleDelete = async (name) => {
-    const coverId = "6528b99742953e2832920fc5";
-    try {
-      const res = await axios.delete(
-        `/api/admin/images?id=${coverId}&imageName=${name}`
-      );
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleDeleteImage = (name, id) => {
+    console.log(name, id);
+    setOpenImageModal(true);
+    setName(name);
+    setId(id);
   };
+
+  const hideModal = () => {
+    setOpenImageModal(false);
+    setName("");
+    setId("");
+  };
+
+  const triggerHandleConfirmed = () => {
+    setHandleConfirmedTriggered(true);
+  };
+
+  // const handleDeleteCover = async (name) => {
+  //   const coverId = "6528b99742953e2832920fc5";
+  //   try {
+  //     const res = await axios.delete(
+  //       `/api/admin/images?id=${coverId}&imageName=${name}`
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const handleDeleteAccomodation = async (name) => {
+  //   const accomodationId = "652968bb03e8325f2af1c141";
+  //   try {
+  //     const res = await axios.delete(
+  //       `/api/admin/images?id=${accomodationId}&imageName=${name}`
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -42,15 +72,25 @@ const page = () => {
           let coverImageArrays = [];
           imageUrls.forEach((image) => {
             coverImageArrays.push({
-              url: image.imageUrls[0].url.toString(),
               name: image.imageUrls[0].imageName,
+              url: image.imageUrls[0].url.toString(),
             });
           });
 
-          console.log(coverImageArrays);
-
           setCoverImages(coverImageArrays);
         }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (handleConfirmedTriggered) {
+      setHandleConfirmedTriggered(false);
+    }
+    fetchImages();
+  }, [handleConfirmedTriggered]);
+  useEffect(() => {
+    const fetchAccomodationImages = async () => {
+      try {
         const response = await axios.get("/api/admin/images");
 
         let accomodationImages = response.data.images.filter(
@@ -61,7 +101,10 @@ const page = () => {
           let imageUrls = accomodationImages[0].imageDetails[0].imageUrls;
           let accomodationImageArrays = [];
           imageUrls.forEach((image) => {
-            accomodationImageArrays.push(image.imageUrls[0].url.toString());
+            accomodationImageArrays.push({
+              name: image.imageUrls[0].imageName,
+              url: image.imageUrls[0].url.toString(),
+            });
           });
 
           setAccomodationImages(accomodationImageArrays);
@@ -70,8 +113,11 @@ const page = () => {
         console.error(error);
       }
     };
-    fetchImages();
-  }, []);
+    if (handleConfirmedTriggered) {
+      setHandleConfirmedTriggered(false);
+    }
+    fetchAccomodationImages();
+  }, [handleConfirmedTriggered]);
   return (
     <div className="h-full bg-white px-4 py-8">
       <h1 className="font-bold text-lg md:text-3xl mb-3 md:mb-12">
@@ -96,7 +142,6 @@ const page = () => {
             <div className="-ml-5 mt-8">
               <Image.PreviewGroup>
                 {coverImages.map((image, index) => {
-                  console.log(image);
                   return (
                     <Space size={8} key={index}>
                       {" "}
@@ -110,7 +155,12 @@ const page = () => {
                         />
                         <button
                           className="px-2 w-[100px] mx-auto py-2 bg-black text-white rounded-lg"
-                          onClick={() => handleDelete(image.name)}
+                          onClick={() =>
+                            handleDeleteImage(
+                              image.name,
+                              "6528b99742953e2832920fc5"
+                            )
+                          }
                         >
                           Delete
                         </button>
@@ -133,7 +183,6 @@ const page = () => {
             <div className="-ml-5 mt-8">
               <Image.PreviewGroup>
                 {accomodationImages.map((image, index) => {
-                  console.log(image);
                   return (
                     <Space size={8} key={index}>
                       {" "}
@@ -142,10 +191,18 @@ const page = () => {
                           key={index}
                           width={180}
                           height={180}
-                          src={image}
+                          src={image.url}
                           className=" mb-2 object-cover rounded-md "
                         />
-                        <button className="px-2 w-[100px] mx-auto py-2 bg-black text-white rounded-lg">
+                        <button
+                          className="px-2 w-[100px] mx-auto py-2 bg-black text-white rounded-lg"
+                          onClick={() =>
+                            handleDeleteImage(
+                              image.name,
+                              "652968bb03e8325f2af1c141"
+                            )
+                          }
+                        >
                           Delete
                         </button>
                       </div>
@@ -159,11 +216,19 @@ const page = () => {
                 name="Accomodations"
                 cloudname="silentpalms"
                 uploadpreset="accomodations"
+                images={accomodationImages}
               />
             </div>
           </TabPanel>
         </Tabs>
       </div>
+      <DeleteImageModal
+        hideModal={hideModal}
+        openModal={openImageModal}
+        name={name}
+        id={id}
+        triggerHandleConfirmed={triggerHandleConfirmed}
+      />
     </div>
   );
 };

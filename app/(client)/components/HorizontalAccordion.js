@@ -14,7 +14,6 @@ import { Collapse } from "react-collapse";
 import axios from "axios";
 
 const HorizontalCard = ({ title, description, price, image, guests, id }) => {
-
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
@@ -32,17 +31,6 @@ const HorizontalCard = ({ title, description, price, image, guests, id }) => {
     selectedImage.label = label;
     setSelectedFiles((prevImages) => [...prevImages, selectedImage]);
   };
-
- 
-  // const handleFileChange = (e) => {
-  //   const files = e.target.files;
-  //   const imagesArray = Array.from(files);
-
-  //   setSelectedImages((prevSelectedImages) => [
-  //     ...prevSelectedImages,
-  //     ...imagesArray,
-  //   ]);
-  // };
 
   const [open, setIsOpen] = useState(false);
 
@@ -83,12 +71,12 @@ const HorizontalCard = ({ title, description, price, image, guests, id }) => {
       const updatedUrls = [...imageUrls];
       const cloudName = "isadia94";
       const uploadPreset = "silentpalms";
-  
+
       for (const image of selectedFiles) {
         const formData = new FormData();
         formData.append("file", image);
         formData.append("upload_preset", uploadPreset);
-  
+
         try {
           const response = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
@@ -105,15 +93,14 @@ const HorizontalCard = ({ title, description, price, image, guests, id }) => {
           console.error("Error uploading image:", error);
         }
       }
-  
+
       console.log("Uploaded images:", updatedUrls);
       // const houseDetails = {
       //   title,
       //   images: updatedUrls,
       // };
-  
-      setDetails((prevDetails)=>({...prevDetails, updatedUrls}));
-  
+
+      setDetails((prevDetails) => ({ ...prevDetails, updatedUrls }));
 
       try {
         const formDataWithImage = {
@@ -267,27 +254,45 @@ const HorizontalCard = ({ title, description, price, image, guests, id }) => {
                           <div className="grid grid-cols-2 gap-y-6">
                             <div className="flex flex-col">
                               <label htmlFor="">Cover</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"cover")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "cover")}
+                              />
                             </div>
                             <div className="flex flex-col">
                               <label htmlFor="">Lounge</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"lounge")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "lounge")}
+                              />
                             </div>
                             <div className="flex flex-col">
                               <label htmlFor="">Kitchen</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"kitchen")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "kitchen")}
+                              />
                             </div>
                             <div className="flex flex-col">
                               <label htmlFor="">Bedroom</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"bedroom")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "bedroom")}
+                              />
                             </div>
                             <div className="flex flex-col">
                               <label htmlFor="">Balcony</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"balcony")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "balcony")}
+                              />
                             </div>
                             <div className="flex flex-col">
                               <label htmlFor="">Toilet</label>
-                              <input type="file" onChange={(e)=>handleFileSelect(e,"toilet")} />
+                              <input
+                                type="file"
+                                onChange={(e) => handleFileSelect(e, "toilet")}
+                              />
                             </div>
                           </div>
                         </div>

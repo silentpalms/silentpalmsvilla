@@ -2,34 +2,9 @@ import { NextResponse } from "next/server";
 import Image from "@/models/ImagesModel";
 import { connectMongoDB } from "@/lib/MongoConnect";
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+export async function GET() {
   try {
     await connectMongoDB();
-
-    if (id) {
-      let image;
-      image = await Image.findById(id);
-      if (!image) {
-        return NextResponse.json(
-          { message: "Image not found" },
-          { status: 404 }
-        );
-      }
-      let imageUrls = image.imageDetails[0].imageUrls;
-      imageUrls = imageUrls.map((image) => {
-        return image.imageUrls[0];
-      });
-
-      let imageToDelete = "cover2";
-      let newImages = imageUrls.filter(
-        (image) => image.imageName !== imageToDelete
-      );
-      console.log(newImages);
-
-      return NextResponse.json({ imageUrls }, { status: 200 });
-    }
     let images;
     images = await Image.find({});
     return NextResponse.json({ images }, { status: 200 });
@@ -119,7 +94,7 @@ export async function DELETE(request) {
 
     // Find the index of the object with the imageName: 'cover1'
     const index = imageUrls.findIndex(
-      (obj) => obj.imageUrls[0].imageName === "cover1"
+      (obj) => obj.imageUrls[0].imageName === imageName
     );
 
     // If the object is found, remove it from the array
