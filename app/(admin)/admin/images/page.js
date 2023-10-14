@@ -121,7 +121,7 @@ const page = () => {
   return (
     <div className="h-full bg-white px-4 py-8">
       <h1 className="font-bold text-lg md:text-3xl mb-3 md:mb-12">
-        Edit Frontend Images
+        Add or Delete Images
       </h1>
       <div>
         <Tabs

@@ -124,7 +124,8 @@ const DeleteImageModal = ({
           </p>
           <p className="my-2 bg-red-400 px-2 py-3 rounded-sm bg-opacity-40 text-red-800">
             <span className="text-red-800 font-bold">Warning:</span> This action
-            is irreversible. Please be certain
+            is irreversible and might affect images on the frontend. Please be
+            certain
           </p>
           <Divider className="bg-green-500 " />
           <div className="mb-6">
