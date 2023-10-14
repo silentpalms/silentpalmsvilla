@@ -2,9 +2,34 @@ import { NextResponse } from "next/server";
 import Image from "@/models/ImagesModel";
 import { connectMongoDB } from "@/lib/MongoConnect";
 
-export async function GET() {
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
   try {
     await connectMongoDB();
+
+    if (id) {
+      let image;
+      image = await Image.findById(id);
+      if (!image) {
+        return NextResponse.json(
+          { message: "Image not found" },
+          { status: 404 }
+        );
+      }
+      let imageUrls = image.imageDetails[0].imageUrls;
+      imageUrls = imageUrls.map((image) => {
+        return image.imageUrls[0];
+      });
+
+      let imageToDelete = "cover2";
+      let newImages = imageUrls.filter(
+        (image) => image.imageName !== imageToDelete
+      );
+      console.log(newImages);
+
+      return NextResponse.json({ imageUrls }, { status: 200 });
+    }
     let images;
     images = await Image.find({});
     return NextResponse.json({ images }, { status: 200 });
@@ -73,26 +98,43 @@ export async function POST(request) {
   }
 }
 
-// export async function DELETE(request) {
-//   const { searchParams } = new URL(request.url);
-//   const id = searchParams.get("id");
+export async function DELETE(request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  const imageName = searchParams.get("imageName");
 
-//   if (!id) {
-//     return NextResponse.json({ message: "Id is required" }, { status: 400 });
-//   }
+  if (!id) {
+    return NextResponse.json({ message: "Id is required" }, { status: 400 });
+  }
 
-//   try {
-//     await connectMongoDB();
-//     let user;
-//     user = await User.findByIdAndDelete(id);
-//     return NextResponse.json(
-//       { message: "User Deleted Successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: "Error occured while connecting " },
-//       { status: 500 }
-//     );
-//   }
-// }
+  try {
+    await connectMongoDB();
+    let image;
+    image = await Image.findById(id);
+    if (!image) {
+      return NextResponse.json({ message: "Image not found" }, { status: 404 });
+    }
+    let imageUrls = image.imageDetails[0].imageUrls;
+    console.log(imageUrls);
+
+    // Find the index of the object with the imageName: 'cover1'
+    const index = imageUrls.findIndex(
+      (obj) => obj.imageUrls[0].imageName === "cover1"
+    );
+
+    // If the object is found, remove it from the array
+    if (index !== -1) {
+      imageUrls.splice(index, 1);
+    }
+
+    // Save the updated image to the database
+    await image.save();
+
+    return NextResponse.json({ imageUrls }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error occured while connecting " },
+      { status: 500 }
+    );
+  }
+}

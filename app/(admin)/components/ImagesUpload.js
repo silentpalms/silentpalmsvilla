@@ -129,7 +129,7 @@ const ImagesUpload = ({ name, images, cloudname, uploadpreset }) => {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {uploadButton}
       </Upload>
       <Modal
         open={previewOpen}

@@ -7,11 +7,26 @@ import TabPanel from "@mui/joy/TabPanel";
 import ImagesUpload from "../../components/ImagesUpload";
 import axios from "axios";
 
+import { Image } from "antd";
+
 import { useState, useEffect } from "react";
+import { Space } from "antd";
 
 const page = () => {
   const [coverImages, setCoverImages] = useState([]);
   const [accomodationImages, setAccomodationImages] = useState([]);
+
+  const handleDelete = async (name) => {
+    const coverId = "6528b99742953e2832920fc5";
+    try {
+      const res = await axios.delete(
+        `/api/admin/images?id=${coverId}&imageName=${name}`
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,8 +41,13 @@ const page = () => {
           let imageUrls = coverImages[0].imageDetails[0].imageUrls;
           let coverImageArrays = [];
           imageUrls.forEach((image) => {
-            coverImageArrays.push(image.imageUrls[0].url.toString());
+            coverImageArrays.push({
+              url: image.imageUrls[0].url.toString(),
+              name: image.imageUrls[0].imageName,
+            });
           });
+
+          console.log(coverImageArrays);
 
           setCoverImages(coverImageArrays);
         }
@@ -47,7 +67,7 @@ const page = () => {
           setAccomodationImages(accomodationImageArrays);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchImages();
@@ -73,6 +93,33 @@ const page = () => {
             </Tab>
           </TabList>
           <TabPanel value={0}>
+            <div className="-ml-5 mt-8">
+              <Image.PreviewGroup>
+                {coverImages.map((image, index) => {
+                  console.log(image);
+                  return (
+                    <Space size={8} key={index}>
+                      {" "}
+                      <div className="flex flex-col gap-2 mb-5">
+                        <Image
+                          key={index}
+                          width={180}
+                          height={180}
+                          src={image.url}
+                          className=" mb-2 object-cover rounded-md "
+                        />
+                        <button
+                          className="px-2 w-[100px] mx-auto py-2 bg-black text-white rounded-lg"
+                          onClick={() => handleDelete(image.name)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </Space>
+                  );
+                })}
+              </Image.PreviewGroup>
+            </div>
             <div className="mt-8 -ml-2">
               <ImagesUpload
                 name="Cover"
@@ -83,10 +130,33 @@ const page = () => {
             </div>
           </TabPanel>
           <TabPanel value={1}>
+            <div className="-ml-5 mt-8">
+              <Image.PreviewGroup>
+                {accomodationImages.map((image, index) => {
+                  console.log(image);
+                  return (
+                    <Space size={8} key={index}>
+                      {" "}
+                      <div className="flex flex-col gap-2 mb-5">
+                        <Image
+                          key={index}
+                          width={180}
+                          height={180}
+                          src={image}
+                          className=" mb-2 object-cover rounded-md "
+                        />
+                        <button className="px-2 w-[100px] mx-auto py-2 bg-black text-white rounded-lg">
+                          Delete
+                        </button>
+                      </div>
+                    </Space>
+                  );
+                })}
+              </Image.PreviewGroup>
+            </div>
             <div className="mt-8 -ml-2">
               <ImagesUpload
                 name="Accomodations"
-                images={accomodationImages}
                 cloudname="silentpalms"
                 uploadpreset="accomodations"
               />
