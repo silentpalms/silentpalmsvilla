@@ -31,7 +31,6 @@ import moment from "moment";
 import { useFormik } from "formik";
 import LoadingHouse from "../components/LoadingHouse";
 
-
 const page = () => {
   const router = useRouter();
   const [filteredHouses, setFilteredHouses] = useState([]);
@@ -96,11 +95,7 @@ const page = () => {
     if (fromDate !== null && toDate !== null) {
       setDisableEnterDetails(false);
     }
-      
   }, [fromDate, toDate]);
-
-
-
 
   const handleFirstDateChange = (date) => {
     const lastDate = chosenDates[1];
@@ -119,12 +114,11 @@ const page = () => {
   const handleSelect = (dates) => {
     if (!dates || dates.includes(null)) {
       setDisableEnterDetails(true);
-      setFromDate(null)
-      setToDate(null)
+      setFromDate(null);
+      setToDate(null);
       setIsOpen(false);
-      setFilteredHouses(duplicateHouses)
+      setFilteredHouses(duplicateHouses);
       return;
-    
     }
     setSelectedDates(dates);
 
@@ -141,7 +135,6 @@ const page = () => {
     setToDate(formattedEndDate);
 
     const filteredHouses = filterByDates(duplicateHouses, startDate, endDate);
- 
 
     setFilteredHouses(filteredHouses);
   };
@@ -205,27 +198,21 @@ const page = () => {
   const filterByType = (e) => {
     setRoomType(e);
 
-    let tempRooms
-
-   
-    
+    let tempRooms;
 
     // Filter by room type
     tempRooms = duplicateHouses.filter((house) => house.roomType === e);
     console.log(tempRooms);
 
-
     // Filter by date range
     if (fromDate && toDate) {
-
       tempRooms = tempRooms.filter((house) => {
         const bookings = house.currentBookings;
-      
+
         if (bookings?.length === 0) {
-         console.log("No bookings");
+          console.log("No bookings");
         }
         for (const booking of bookings) {
-         
           const bookingFromDate = moment(booking.fromDate, "DD-MM-YYYY");
           const bookingToDate = moment(booking.toDate, "DD-MM-YYYY");
           if (
@@ -252,20 +239,9 @@ const page = () => {
 
   const handleOpen = (event, houseId) => {
     event.preventDefault();
-    if (houseId === "64cb7016749814f1a4db72d2") {
- 
-      return; // do nothing
-    } else if (houseId === "64cb85de749814f1a4db72e0") {
-      
+    if (houseId === "64cb85de749814f1a4db72e0") {
       return;
     } else if (houseId === "64cb8590749814f1a4db72de") {
-      
-      return;
-    } else if (houseId === "64cb8c90749814f1a4db72e7") {
-      
-      return;
-    } else if (houseId === "64cb74f8749814f1a4db72d4") {
-      
       return;
     }
 
@@ -334,7 +310,7 @@ const page = () => {
                   onChange={(e) => filterByType(e.target.value)}
                 >
                   <option value="">Select Type</option>
-                 
+
                   <option value="Executive">Executive</option>
                   <option value="Standard">Standard</option>
                   <option value="Studio">Studio</option>
