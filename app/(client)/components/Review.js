@@ -12,6 +12,7 @@ const Review = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [review, setReview] = useState("");
   const [activeLabel, setActiveLabel] = useState(null);
   const [placeholder, setPlaceholder] = useState("");
   const [showReview, setShowReview] = useState(true);
@@ -44,17 +45,19 @@ const Review = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (name && message === "") {
+    if (name && message && review === "") {
       alert("Please fill all fields");
     } else {
-      const review = {
+      const userReview = {
         user: name,
         rating: val,
         message: message,
+        review: review,
       };
-      await axios.post("/api/client/reviews", review);
+      await axios.post("/api/client/reviews", userReview);
       setName("");
       setMessage("");
+      setReview("");
       setShow(false);
       setActiveLabel(null);
       setShowReview(false);
@@ -279,6 +282,19 @@ const Review = () => {
                             />
                           </div>
 
+                          <div className="flex flex-col mb-5">
+                            <label htmlFor="message" className="text-sm">
+                              Review
+                            </label>
+                            <textarea
+                              type="text"
+                              className="px-2 py-2 outline-none border border-gray-200 w-full md:w-[400px] h-[100px]"
+                              placeholder="How was your experience ?"
+                              required
+                              value={message}
+                              onChange={(e) => setReview(e.target.value)}
+                            />
+                          </div>
                           <div className="flex flex-col mb-5">
                             <label htmlFor="message" className="text-sm">
                               Message

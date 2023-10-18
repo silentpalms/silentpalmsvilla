@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -30,14 +30,12 @@ const poppins = localFont({
   ],
 });
 
-
-
 const page = () => {
   const [bookings, setBookings] = useState([]);
   const [open, setIsOpen] = useState(false);
   const [price, setPrice] = useState(null);
   const [openBookingModal, setOpenBookingModal] = useState(false);
-  const [bookingId, setBookingId] = useState("")
+  const [bookingId, setBookingId] = useState("");
   const showBookingModal = () => {
     setOpenBookingModal(true);
   };
@@ -46,14 +44,15 @@ const page = () => {
     setOpenBookingModal(false);
   };
 
-
- 
-
   const columns = [
     {
       name: "Booking ID",
       cell: (row) => {
-        return <span>BK00{row.bookingId}</span>;
+        let rowArray = [];
+        rowArray.push(row);
+        console.log(rowArray);
+
+        return <span>BK001{row.bookingId}</span>;
       },
       sortable: true,
       minWidth: "50px",
@@ -107,16 +106,15 @@ const page = () => {
       name: "Action",
       ignoreRowClick: true,
       cell: (row) => {
-      
-          return (
-            <span
-              className="text-red-500 font-bold underline cursor-pointer"
-              onClick={() => handleDelete(row)}
-              id={row._id}
-            >
-              Delete Booking
-            </span>
-          );
+        return (
+          <span
+            className="text-red-500 font-bold underline cursor-pointer"
+            onClick={() => handleDelete(row)}
+            id={row._id}
+          >
+            Delete Booking
+          </span>
+        );
       },
 
       button: true,
@@ -158,12 +156,6 @@ const page = () => {
     },
   };
 
-
-
-
-
-
-
   useEffect(() => {
     async function fetchBookings() {
       try {
@@ -175,17 +167,16 @@ const page = () => {
       }
     }
     fetchBookings();
-  }, [bookings]);
+  }, []);
 
-  const handleDelete =(row)=>{
-    showBookingModal(row._id)
-    setBookingId(row._id)
-
-  }
+  const handleDelete = (row) => {
+    showBookingModal(row._id);
+    setBookingId(row._id);
+  };
 
   return (
     <div>
-       {!open && (
+      {!open && (
         <div
           className={`${poppins.className} pt-6  px-4 md:py-14 md:pl-[230px] md:pr-[30px]  h-full md:w-screen md:-ml-[200px] bg-gray-50 `}
         >
@@ -202,12 +193,10 @@ const page = () => {
       )}
 
       <DeleteBookingModal
-      openModal={openBookingModal}
-      showBookingModal={showBookingModal}
-      hideModal={hideBookingModal}
-      bookingId={bookingId}
-      
-      
+        openModal={openBookingModal}
+        showBookingModal={showBookingModal}
+        hideModal={hideBookingModal}
+        bookingId={bookingId}
       />
     </div>
   );

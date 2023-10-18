@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Provider from "./context/client-provider";
 
-
 const inter = Inter({ subsets: ["latin"] });
 const karla = Karla({
   subsets: ["latin"],
@@ -15,17 +14,17 @@ const karla = Karla({
 
 export const metadata = {
   title: "Silent Palms Villas",
-  description: "Accomodations website in Diani",
+  description:
+    "Silent Palms Villa, located in South Coast Mombasa, Kenya, offers luxurious two-bedroom units amidst beautiful green gardens, providing a serene and tranquil environment.",
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className={karla.className}>
         <Provider session={session}>{children}</Provider>
-              
-        </body>
+      </body>
     </html>
   );
 }
