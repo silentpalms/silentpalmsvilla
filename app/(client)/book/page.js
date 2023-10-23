@@ -60,8 +60,10 @@ const page = () => {
 
 
   const parsedValues = values ? JSON.parse(values) : {};
+  
 
-  const amountTotals = parsedValues?.discount>0 || !null ?parsedValues?.discount * noOfDays:parsedValues?.houseAmount * noOfDays;
+  const amountTotals = parsedValues?.discount ?parsedValues.discount * noOfDays:parsedValues?.houseAmount * noOfDays;
+
   const userDetails = {
     firstName: parsedValues.firstName,
     lastName: parsedValues.lastName,
