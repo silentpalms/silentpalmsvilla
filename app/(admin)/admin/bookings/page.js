@@ -48,14 +48,16 @@ const page = () => {
     {
       name: "Booking ID",
       cell: (row) => {
-        let rowArray = [];
-        rowArray.push(row);
-        console.log(rowArray);
-
-        return <span>BK001{row.bookingId}</span>;
+        return <span>BK00{row.bookingId}</span>;
       },
-      sortable: true,
+     
       minWidth: "50px",
+    },
+    {
+      name: "Reference No",
+      selector: (row) => row.referenceNumber,
+      
+      minWidth: "120px",
     },
     {
       name: "House",

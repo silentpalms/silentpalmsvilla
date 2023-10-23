@@ -45,8 +45,13 @@ const bookingSchema = new Schema(
     },
     ApprovedBy: {
       type: String,
-      required: "true",
+      required: true,
       default: "Not Approved",
+    },
+
+    referenceNumber:{
+      type:String,
+      required:true
     },
 
     month: {

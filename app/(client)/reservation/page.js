@@ -852,6 +852,25 @@ function HouseForm({
               <div>{formik.errors.nationality}</div>
             )}
           </div>
+          <div className="flex flex-col">
+            <label>Discount Per Day</label>
+            <input
+              type="number"
+              name="discount"
+              className={`border ${
+                formik.errors.discount ? "border-red-500" : "border-black"
+              } px-2 py-3`}
+              id="discount"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.discount}
+            />
+            {formik.errors.discount ? (
+              <div className="text-red-500 -mb-2 text-sm">
+                {formik.errors.discount}
+              </div>
+            ) : null}
+          </div>
         </div>
 
         <div className="w-full flex justify-between flex-row-reverse">

@@ -17,6 +17,7 @@ const page = () => {
   const [initialMonth, setInitialMonth] = useState("MON");
   const [finalDate, setFinalDate] = useState("O0");
   const [finalMonth, setFinalMonth] = useState("MON");
+  const [reference, setReference] = useState("")
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,8 +31,17 @@ const page = () => {
 
   const checkHandler = () => {
     setChecked(!checked);
-    setDisabled(!disabled);
+    
   };
+
+
+  const handleForm = (e)=>{
+   
+    setReference(e.target.value)
+    if(reference && checked){
+      setDisabled(false)
+    }
+  }
 
   const fromDate = results?.fromDate;
   const toDate = results?.toDate;
@@ -48,9 +58,10 @@ const page = () => {
 
   const values = results?.values;
 
+
   const parsedValues = values ? JSON.parse(values) : {};
 
-  const amountTotal = parsedValues?.houseAmount * noOfDays;
+  const amountTotals = parsedValues?.discount>0 || !null ?parsedValues?.discount * noOfDays:parsedValues?.houseAmount * noOfDays;
   const userDetails = {
     firstName: parsedValues.firstName,
     lastName: parsedValues.lastName,
@@ -68,11 +79,12 @@ const page = () => {
       fromDate: fromThisDay,
       toDate: toThisDay,
       user: userDetails,
-      amount: amountTotal,
+      amount: amountTotals,
       totalDays: noOfDays,
       houseId: parsedValues.houseId,
       house: parsedValues.houseTitle,
       guests,
+      reference
     };
 
     try {
@@ -294,15 +306,15 @@ const page = () => {
                           <BsCashStack />
                         </p>
                         <p className="text-2xl text-white absolute mb-0 bottom-0 left-1/2 -translate-x-1/2">
-                          <span> {formatter.format(amountTotal)} </span>
+                          <span> {formatter.format(amountTotals)} </span>
                         </p>
                       </div>
                     </div>
                     <div className="py-6 md:w-[450px] mx-auto">
                       <p className="font-extrabold mb-0">
                         You are required to pay an initial deposit of KES{" "}
-                        {formatter.format(amountTotal / 2)} or a full payment of
-                        KES {formatter.format(amountTotal)} via lipa na mpesa
+                        {formatter.format(amountTotals / 2)} or a full payment of
+                        KES {formatter.format(amountTotals)} via lipa na mpesa
                         paybill no below then click confirm payment.
                       </p>
                       <div className="mt-6 text-center">
@@ -313,7 +325,7 @@ const page = () => {
                         <p className="text-lg">ACCOUNT</p>
                         <p className="text-xl font-semibold">YOUR NAME</p>
                       </div>
-                      <div className="mt-6 space-x-3 md:space-x-3  flex items-center">
+                      <div className="mt-6 mb-6 space-x-3 md:space-x-3  flex items-center">
                         <input
                           type="checkbox"
                           checked={checked}
@@ -322,6 +334,10 @@ const page = () => {
                         <p className="text-sm md:text-base  ">
                           I acknowledge the payment terms and conditions.
                         </p>
+                      </div>
+                      <div className="w-full text-center mb-6">
+                        <p className="mb-2">Enter Reference Number</p>
+                       <input className="border border-gray-400 px-2 py-2 outline-none" required type="text" value={reference} onChange={handleForm}/>
                       </div>
                       <div className=" text-center">
                         <button

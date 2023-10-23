@@ -14,7 +14,7 @@ export async function POST(request){
     console.log(body);
 
 
-    const { fromDate, toDate, house, user, amount, totalDays, houseId, guests, } =
+    const { fromDate, toDate, house, user, amount, totalDays, houseId, guests,reference } =
     body
 
     try {
@@ -28,10 +28,11 @@ export async function POST(request){
           totalDays,
           houseId,
           guests,
+          referenceNumber:reference
         });
         const booking = await newBooking.save();
 
-        console.log(booking);
+   
         let houseTemp;
     
         houseTemp = await House.findById(houseId);

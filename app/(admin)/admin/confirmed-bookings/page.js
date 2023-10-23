@@ -43,8 +43,12 @@ const page = () => {
       cell: (row) => {
         return <span>BK00{row.bookingId}</span>;
       },
-      sortable: true,
       minWidth: "50px",
+    },
+    {
+      name: "Reference No",
+      selector: (row) => row.referenceNumber,     
+      minWidth: "120px",
     },
     {
       name: "House",
